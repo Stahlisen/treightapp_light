@@ -45,6 +45,7 @@ public class GoalFragment extends Fragment {
     public static Date SELECTED_DATE;
     public static float SELECTED_WEIGHT;
     public static boolean isLoose = true;
+    public static float ENTERED_WEIGHT;
 
 
     @Override
@@ -53,6 +54,7 @@ public class GoalFragment extends Fragment {
         super.onCreateView(inflater, parent, savedInstanceState);
         View view = inflater.inflate(R.layout.goal_fragment, parent, false);
         setHasOptionsMenu(true);
+        Log.d("argument", "STARTING GOALFRAGMENT");
 
         edit_weight = (ImageButton) view.findViewById(R.id.button_change_goal);
         edit_date = (ImageButton) view.findViewById(R.id.button_change_goal_date);
@@ -69,10 +71,16 @@ public class GoalFragment extends Fragment {
             String restored_date = restoreBundle.getString("goal_date");
             Boolean restored_isLoose = restoreBundle.getBoolean("goal_isloose");
 
+
+            String weight_value = Float.toString(restored_weight);
+
+            mWeightValue.setText(weight_value);
+            Log.d("argument", weight_value);
             Log.d("argument", restored_date);
 
 
         } else {
+            Log.d("argument", "no restored data");
             initializeGoalData();
         }
 
@@ -234,6 +242,7 @@ public class GoalFragment extends Fragment {
                 String s = Float.toString(convertedFloat);
                 Log.d("np_values", s);
                 mWeightValue.setText(s + " KG");
+                ENTERED_WEIGHT = convertedFloat;
                 mWeightValue.setTextColor(getResources().getColor(R.color.green_2));
                 didSetWeight = true;
                 enableSaveIfDataEntered();

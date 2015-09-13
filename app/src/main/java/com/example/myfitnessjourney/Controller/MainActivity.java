@@ -3,6 +3,7 @@ package com.example.myfitnessjourney.Controller;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_main_activity);
-        Log.d("whenOnCreate", "thismessage");
+        Log.d("argument", "ACTIVITYSTARTED");
         //Realm.deleteRealmFile(this);
 
         // Initializing Toolbar and setting it as the actionbar
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         String fragmentids = Integer.toString(currentFragment);
                         Log.d("fragment", fragmentids);
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.frame, gf)
+                                .replace(R.id.frame, gf, "goal_fragment")
                                 .commit();
 
 
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
          */
         if (savedInstanceState != null ) {
             restoreFragmentFromSavedState(savedInstanceState);
+            Log.d("argument", "sis is not null");
 
         } else {
             Bundle bundleNew = new Bundle();
@@ -211,22 +213,20 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.my_goal:
                 GoalFragment gf = new GoalFragment();
-                gf.setArguments(bundle);
+                if (bundle != null) {
+                    Log.d("argument", "customNavCall: bundle isnt null");
+                    gf.setArguments(bundle);
+                }
                 currentFragment = FRAGMENT_2;
-                Log.d("fragment", "2");
-                String fragmentids = Integer.toString(currentFragment);
-                Log.d("fragment", fragmentids);
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame, gf)
+                        .replace(R.id.frame, gf, "goal_fragment")
                         .commit();
-
-
 
         }
     }
 
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        //super.onSaveInstanceState(outState);
         String s = Integer.toString(currentFragment);
         Log.d("fragment", s + "onsave");
         outState.putInt("currentFragment", currentFragment);
@@ -242,15 +242,22 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } else if (currentFragment == FRAGMENT_2) {
+            Log.d("argument", "onSaveInstance: isFragment 2");
 
-            if (GoalFragment.SELECTED_WEIGHT > 0) {
-                outState.putFloat("goal_weight", GoalFragment.SELECTED_WEIGHT);
+
+            if (GoalFragment.ENTERED_WEIGHT > 0.0f) {
+                outState.putFloat("goal_weight", GoalFragment.ENTERED_WEIGHT);
             }
             if (GoalFragment.SELECTED_DATE != null) {
                 String goal_date = GoalFragment.SELECTED_DATE.toString();
                 outState.putString("goal_date", goal_date);
             }
+            Log.d("argument", "isLOose = " + GoalFragment.isLoose);
             outState.putBoolean("goal_isloose", GoalFragment.isLoose);
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("goal_fragment");
+            getSupportFragmentManager().beginTransaction()
+                    .detach(fragment)
+                    .commitAllowingStateLoss();
 
         }
     }
@@ -338,8 +345,10 @@ public class MainActivity extends AppCompatActivity {
         } else if (currentFragment == 2) {
             tempId = R.layout.weighin_detail;
             customNavigationCall(tempId, savedInstanceState);
+
         } else if (currentFragment == 3) {
             tempId = R.id.my_goal;
+            customNavigationCall(tempId, savedInstanceState);
         }
         if (tempId == R.layout.weighin_detail) {
             Bundle bundleWithSelectedId = new Bundle();

@@ -29,7 +29,7 @@ public class WeighInDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
         View view = inflater.inflate(R.layout.weighin_detail, parent, false);
-
+        Log.d("argument", "weighindetail created");
         setHasOptionsMenu(true);
         mId = getArguments().getInt("weighin_id");
         bmf = new BitMapFactory();
@@ -51,7 +51,7 @@ public class WeighInDetailFragment extends Fragment {
         String weight_text = Float.toString(selectedWeighIn.getWeight()) + "KG";
         mWeight.setText(weight_text);
         mDate = (TextView) view.findViewById(R.id.detail_date);
-        String date_text = selectedWeighIn.getDate().toString();
+        String date_text = "hej";//selectedWeighIn.getDate().toString();
         mDate.setText(date_text);
 
         mIdView = (TextView) view.findViewById(R.id.detail_id);

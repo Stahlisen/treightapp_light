@@ -39,6 +39,7 @@ public class WeighInListFragment extends ListFragment {
         mWeighIns = WeighInLab.get(getActivity()).getWeighins();
         Collections.reverse(mWeighIns);
 
+
         WeighInAdapter adapter = new WeighInAdapter(mWeighIns);
         setListAdapter(adapter);
         setHasOptionsMenu(true);
