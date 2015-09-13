@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="false" android:drawable="@color/red"  />
+    <item android:state_checked="true" android:drawable="@color/green_2"  />
+</selector><!-- From: file:/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/src/main/res/drawable/goal_type_togglebutton.xml -->

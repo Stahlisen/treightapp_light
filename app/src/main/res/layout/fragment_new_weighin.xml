@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/weight_edit_container">
+
+    <TextView
+        android:id="@+id/weight_label_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weight_label"
+        android:textStyle="bold"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/weight_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/weight_enter_hint"
+        android:layout_below="@id/weight_label_title"
+        android:textStyle="bold"
+        android:padding="10dp"
+        />
+
+
+    <ImageButton
+        android:id="@+id/weight_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edit_button"
+        android:layout_alignBottom="@id/weight_edit"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/picture_edit_container">
+
+        <TextView
+            android:id="@+id/picture_label_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/picture_label"
+            android:textStyle="bold"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/picture_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/picture_enter_hint"
+            android:layout_below="@id/picture_label_title"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textSize="12sp"
+            />
+
+
+        <ImageButton
+            android:id="@+id/browse_gallery_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/browse_button"
+            android:layout_alignBottom="@id/picture_edit"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+        <ImageButton
+            android:id="@+id/take_picture_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/camera_button"
+            android:layout_alignBottom="@id/picture_edit"
+            android:layout_toLeftOf="@id/browse_gallery_image_button"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <ImageView
+        android:id="@+id/photo_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>

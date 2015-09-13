@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground">
+
+    <TextView
+        android:id="@+id/id_item_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:text="WEIGH IN# 4"/>
+    
+    <TextView
+        android:id="@+id/weight_item_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:padding="8dp"
+        android:text="80,7 KG"
+        android:textColor="@color/green_2"/>
+
+    <TextView
+        android:id="@+id/date_item_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:text="3 DAYS AGO"
+        android:layout_alignBottom="@+id/weighin_image_view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:padding="8dp"
+        android:layout_marginRight="50dp"
+        android:id="@+id/weighin_image_view" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/view_details_button"/>
+
+</RelativeLayout><!-- From: file:/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/src/main/res/layout/weighin_list_item.xml -->

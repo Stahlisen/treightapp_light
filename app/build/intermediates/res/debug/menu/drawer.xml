@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/progress"
+            android:checked="false"
+            android:icon="@drawable/ic_bullish_100"
+            android:title="My Journey"/>
+
+
+        <item
+            android:id="@+id/my_goal"
+            android:checked="false"
+            android:icon="@drawable/ic_diploma_light"
+            android:title="My Goal" />
+
+
+    </group>
+</menu><!-- From: file:/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/src/main/res/menu/drawer.xml -->

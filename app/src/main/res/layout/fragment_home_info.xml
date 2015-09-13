@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/text_white"
+     >
+
+    <TextView
+        style="@style/home_info_text"
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_black"/>
+    
+    <TextView
+        style="@style/home_info_text"
+        android:id="@+id/current_weight_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome_text"
+        android:text="@string/current_weight_desc"
+        android:textColor="@color/text_black"/>
+    
+    <TextView
+        style="@style/home_info_text"
+        android:id="@+id/goal_weight_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/current_weight_tv"
+        android:text="@string/goal_weight_desc"
+        android:textColor="@color/text_black"/>
+    
+    <TextView
+        style="@style/home_info_text"
+        android:id="@+id/goal_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goal_weight_tv"
+        android:text="@string/goal_date_desc"
+        android:textColor="@color/text_black"/>
+    
+    <TextView
+        style="@style/home_info_text"
+        android:id="@+id/time_remaining_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/goal_date_tv"
+        android:text="@string/time_remaining_desc"
+        android:textColor="@color/text_black"/>
+
+    <TextView
+        style="@style/home_info_value"
+        android:id="@+id/time_remaining_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/time_remaining_tv"
+        android:layout_alignBottom="@+id/time_remaining_tv"
+        android:layout_toRightOf="@+id/time_remaining_tv"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_black"/>
+
+    <TextView
+        style="@style/home_info_value"
+        android:id="@+id/goal_weight_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/goal_weight_tv"
+        android:layout_alignLeft="@+id/goal_date_v"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_black"/>
+
+    <TextView
+        style="@style/home_info_value"
+        android:id="@+id/current_weight_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/current_weight_tv"
+        android:layout_alignLeft="@+id/time_remaining_v"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_black"/>
+
+    <TextView
+        android:id="@+id/goal_date_v"
+        style="@style/home_info_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/goal_date_tv"
+        android:layout_alignBottom="@+id/goal_date_tv"
+        android:layout_toRightOf="@+id/time_remaining_tv"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_black"/>
+
+</RelativeLayout>
