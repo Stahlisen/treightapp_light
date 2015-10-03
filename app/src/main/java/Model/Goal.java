@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * Created by fredrikstahl on 15-08-07.
+ * Goal class constuctor
  */
 public class Goal {
     private float weight;

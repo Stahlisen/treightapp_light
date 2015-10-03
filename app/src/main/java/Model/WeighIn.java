@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * Created by fredrikstahl on 15-07-29.
+ * Weighin class with constructor
  */
 public class WeighIn {
     private int mId;

@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +27,12 @@ import Services.WeighInLab;
  * Created by fredrikstahl on 15-08-07.
  */
 public class GoalFragment extends Fragment {
-    ImageButton edit_weight, edit_date;
-    ToggleButton goal_type_toggle;
-    TextView mWeightValue, mDateValue;
-    Button mSaveButton;
-    DatePicker mDatePicker;
-    Calendar calendar;
+    private ImageButton edit_weight, edit_date;
+    private ToggleButton goal_type_toggle;
+    private TextView mWeightValue, mDateValue;
+    private Button mSaveButton;
+    private DatePicker mDatePicker;
+    private Calendar calendar;
     private float weight_goal;
     private Date date_goal;
     private int selectedConstant;
@@ -41,7 +40,7 @@ public class GoalFragment extends Fragment {
     private boolean didSetWeight = false;
     private boolean didSetDate = false;
     final static int DATE_PICKER_ID = 0;
-    int mYear, mMonth, mDay;
+    private int mYear, mMonth, mDay;
     public static Date SELECTED_DATE;
     public static float SELECTED_WEIGHT;
     public static boolean isLoose = true;
@@ -51,11 +50,12 @@ public class GoalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
+
         super.onCreateView(inflater, parent, savedInstanceState);
         View view = inflater.inflate(R.layout.goal_fragment, parent, false);
         setHasOptionsMenu(true);
-        Log.d("argument", "STARTING GOALFRAGMENT");
 
+        //Intialize view elements
         edit_weight = (ImageButton) view.findViewById(R.id.button_change_goal);
         edit_date = (ImageButton) view.findViewById(R.id.button_change_goal_date);
         goal_type_toggle = (ToggleButton) view.findViewById(R.id.goal_switch);
@@ -64,28 +64,15 @@ public class GoalFragment extends Fragment {
         mSaveButton = (Button) view.findViewById(R.id.save_goal_btn);
         mSaveButton.setEnabled(false);
 
+        //attempt to restore data on rotation with bundle as arguments
         Bundle restoreBundle = getArguments();
         if (restoreBundle != null) {
-            Log.d("argument", "GoalFragment: restored data exists");
-             float restored_weight = restoreBundle.getFloat("goal_weight");
-            String restored_date = restoreBundle.getString("goal_date");
-            Boolean restored_isLoose = restoreBundle.getBoolean("goal_isloose");
-
-
+            float restored_weight = restoreBundle.getFloat("goal_weight");
             String weight_value = Float.toString(restored_weight);
-
             mWeightValue.setText(weight_value);
-            Log.d("argument", weight_value);
-            Log.d("argument", restored_date);
-
-
         } else {
-            Log.d("argument", "no restored data");
             initializeGoalData();
         }
-
-
-
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,15 +102,10 @@ public class GoalFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if (isChecked) {
-                    Log.d("alarmCheck", "ALARM SET TO TRUE");
-                    //GAIN
                     isLoose = false;
 
                 } else {
-                    Log.d("alarmCheck", "ALARM SET TO FALSE");
-                    //Loose
                     isLoose = true;
-
                 }
             }
         });
@@ -132,6 +114,7 @@ public class GoalFragment extends Fragment {
         return view;
     }
 
+    //Get goal data from internal storage if goal data has been set before (if it exists in storage)
     public void initializeGoalData() {
         Goal goal = WeighInLab.get(getActivity()).getGoal();
         if (goal == null) {
@@ -153,6 +136,7 @@ public class GoalFragment extends Fragment {
 
     }
 
+    //Show datepicker using a datepickerfragment see DatePickerFragment
     private void showDatePicker() {
         DatePickerFragment dpfragment = new DatePickerFragment();
 
@@ -182,13 +166,10 @@ public class GoalFragment extends Fragment {
             mDateValue.setText(dateString);
             didSetDate = true;
             enableSaveIfDataEntered();
-
-
-
         }
     };
 
-
+    //Show weight editor as a dialog
     public void showWeightEditor() {
         final Dialog d = new Dialog(getActivity());
         d.setTitle("Goal weight");
@@ -209,8 +190,6 @@ public class GoalFragment extends Fragment {
             @Override
             public void onValueChange(NumberPicker picker, int oldValb, int newValb) {
                 selectedConstant = picker.getValue();
-                String s = Integer.toString(picker.getValue());
-                Log.d("np_values", s);
             }
 
         });
@@ -228,7 +207,6 @@ public class GoalFragment extends Fragment {
                 int index = picker.getValue();
                 String val = decimals[index];
                 SELECTED_WEIGHT = Float.parseFloat(val);
-                Log.d("np_values", val);
 
             }
 
@@ -240,7 +218,6 @@ public class GoalFragment extends Fragment {
                 Float tempfloat = new Float(selectedConstant);
                 convertedFloat = tempfloat + SELECTED_WEIGHT;
                 String s = Float.toString(convertedFloat);
-                Log.d("np_values", s);
                 mWeightValue.setText(s + " KG");
                 ENTERED_WEIGHT = convertedFloat;
                 mWeightValue.setTextColor(getResources().getColor(R.color.green_2));
@@ -269,6 +246,7 @@ public class GoalFragment extends Fragment {
 
     }
 
+    //Enable save button if any data was entered
     public void enableSaveIfDataEntered() {
 
         if (didSetDate && didSetWeight) {

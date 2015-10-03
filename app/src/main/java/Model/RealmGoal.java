@@ -6,6 +6,7 @@ import io.realm.RealmObject;
 
 /**
  * Created by fredrikstahl on 15-08-07.
+ * Class that acts as a constructor for a Realm goal object, see Realm API.
  */
 public class RealmGoal extends RealmObject {
 

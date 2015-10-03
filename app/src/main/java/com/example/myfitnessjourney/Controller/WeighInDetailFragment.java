@@ -2,7 +2,6 @@ package com.example.myfitnessjourney.Controller;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ public class WeighInDetailFragment extends Fragment {
     private TextView mWeight, mDate, mIdView, mCaption;
     private int mId;
     private WeighIn selectedWeighIn;
-    BitMapFactory bmf;
+    private BitMapFactory bmf;
     private String WEIGHINTITLE;
 
     @Override
@@ -29,38 +28,39 @@ public class WeighInDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
         View view = inflater.inflate(R.layout.weighin_detail, parent, false);
-        Log.d("argument", "weighindetail created");
         setHasOptionsMenu(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
+        //Get the selected id from arguments and set all view elements
         mId = getArguments().getInt("weighin_id");
         bmf = new BitMapFactory();
         selectedWeighIn = WeighInLab.get(getActivity()).getWeighInWithId(mId);
         WEIGHINTITLE = "WEIGHIN #" + selectedWeighIn.getId();
         mCaption = (TextView) view.findViewById(R.id.photo_caption);
-        mPictureView = (ImageView)view.findViewById(R.id.detail_image);
+        mPictureView = (ImageView) view.findViewById(R.id.detail_image);
         String path = selectedWeighIn.getPicturePath();
-        if (path != null && !path.isEmpty()) {
-            Log.d("freppe", "f" + selectedWeighIn.getPicturePath());
-            mPictureView.setImageBitmap(bmf.createBitmapFromFilePath(selectedWeighIn.getPicturePath()));
 
+        //If there is an imagepath, get the image, else set to "no photo"
+        if (path != null && !path.isEmpty()) {
+            mPictureView.setImageBitmap(bmf.createBitmapFromFilePath(selectedWeighIn.getPicturePath()));
         } else {
             mCaption.setText("NO PHOTO FOR THIS WEIGH IN");
         }
-
 
         mWeight = (TextView) view.findViewById(R.id.detail_weight);
         String weight_text = Float.toString(selectedWeighIn.getWeight()) + "KG";
         mWeight.setText(weight_text);
         mDate = (TextView) view.findViewById(R.id.detail_date);
-        String date_text = "hej";//selectedWeighIn.getDate().toString();
+
+        String date_text = selectedWeighIn.getDate().toString();
         mDate.setText(date_text);
 
         mIdView = (TextView) view.findViewById(R.id.detail_id);
         String id_text = "WEIGHIN #" + selectedWeighIn.getId();
         mIdView.setText(id_text);
 
-
         return view;
-
 
     }
 
@@ -70,4 +70,5 @@ public class WeighInDetailFragment extends Fragment {
         // Set title
         getActivity().setTitle(WEIGHINTITLE);
     }
+
 }

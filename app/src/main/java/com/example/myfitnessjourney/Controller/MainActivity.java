@@ -3,24 +3,21 @@ package com.example.myfitnessjourney.Controller;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by fredrikstahl on 15-08-04.
  */
+
 public class MainActivity extends AppCompatActivity {
-    //Defining Variables
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
@@ -31,204 +28,104 @@ public class MainActivity extends AppCompatActivity {
     public static final int FRAGMENT_2 = 3;
     public int currentFragment;
     public static int SELECTED_WEIGHIN = 0;
+    public FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_main_activity);
-        Log.d("argument", "ACTIVITYSTARTED");
         //Realm.deleteRealmFile(this);
+        mFragmentManager = getSupportFragmentManager();
+        initiateNavigation();
 
-        // Initializing Toolbar and setting it as the actionbar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //Initializing NavigationView
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        TextView mTextView = (TextView) findViewById(R.id.profile_label_text);
-        mTextView.setText("Hola");
-
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if (menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
-
-                //Closing drawer on item click
-                drawerLayout.closeDrawers();
-
-                //Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()) {
-
-
-                    //Replacing the main content with ContentFragment Which is our Inbox View;
-                    case R.id.progress:
-                        Toast.makeText(getApplicationContext(), "Inbox Selected", Toast.LENGTH_SHORT).show();
-                        WeighInListFragment fragment = new WeighInListFragment();
-                        currentFragment = FRAGMENT_1;
-                        Log.d("fragment", "1");
-                        String fragmentid = Integer.toString(currentFragment);
-                        Log.d("fragment", fragmentid);
-                        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame, fragment);
-                        fragmentTransaction.commit();
-                        return true;
-
-                    // For rest of the options we just show a toast on click
-
-                    case R.id.my_goal:
-                        GoalFragment gf = new GoalFragment();
-                        currentFragment = FRAGMENT_2;
-                        Log.d("fragment", "2");
-                        String fragmentids = Integer.toString(currentFragment);
-                        Log.d("fragment", fragmentids);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.frame, gf, "goal_fragment")
-                                .commit();
-
-
-                    default:
-                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
-                        return true;
-
-                }
-            }
-        });
-
-        // Initializing Drawer Layout and ActionBarToggle
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        abdToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
-        };
-
-        //Setting the actionbarToggle to drawer layout
-        drawerLayout.setDrawerListener(abdToggle);
-
-        //Sync toggle
-        abdToggle.syncState();
-
-        //Handling backbutton visibility depending on back stack entry count
-        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                String s = Integer.toString(getSupportFragmentManager().getBackStackEntryCount());
-                    Log.d("backstack", s);
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                } else {
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    abdToggle.setDrawerIndicatorEnabled(true);
-
-
-                }
-            }
-        });
-
-        //Click listener for back button
-        abdToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-
-            }
-        });
-
-        /*
-        If there is a savedInstance, restore fragment from saved state
-
-         */
-        if (savedInstanceState != null ) {
+        //If there is a savedInstance, restore fragment from saved state
+        if (savedInstanceState != null) {
             restoreFragmentFromSavedState(savedInstanceState);
-            Log.d("argument", "sis is not null");
+
 
         } else {
             Bundle bundleNew = new Bundle();
             bundleNew.putBoolean("isBackPressed", false);
             customNavigationCall(R.id.home, bundleNew);
-
         }
 
     }
 
     //Method for handling custom navigation calls through buttons clicks or navigation.
-
     public void customNavigationCall(int itemId, Bundle bundle) {
 
         switch (itemId) {
 
+
             case R.id.action_add:
                 abdToggle.setDrawerIndicatorEnabled(false);
-                NewWeighInFragment nwf = new NewWeighInFragment();
-                currentFragment = FRAGMENT_1A;
-                Log.d("fragment", "1A");
-                String fragmentid = Integer.toString(currentFragment);
-                Log.d("fragment", fragmentid);
-
-                if (bundle != null) {
-                    Log.d("argument", "bundle isnt null");
-                    nwf.setArguments(bundle);
+                NewWeighInFragment nwf = (NewWeighInFragment) mFragmentManager.findFragmentByTag("FRAGMENT_1A");
+                if (nwf == null) {
+                    nwf = new NewWeighInFragment();
+                    mFragmentManager.beginTransaction()
+                            .replace(R.id.frame, nwf, "FRAGMENT_1A")
+                            .addToBackStack("FRAGMENT_1A")
+                            .commit();
+                } else {
+                    mFragmentManager.beginTransaction()
+                            .replace(R.id.frame, nwf, "FRAGMENT_1A")
+                            .commit();
                 }
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame, nwf)
-                        .addToBackStack(null)
-                        .commit();
+                currentFragment = FRAGMENT_1A;
+
+
                 break;
 
             case R.id.home:
                 if (bundle == null) {
-                    Log.d("isbundlenull", "yes");
                     onBackPressed();
-
                 }
                 WeighInListFragment fragment = new WeighInListFragment();
                 currentFragment = FRAGMENT_1;
-                String fragmentidt = Integer.toString(currentFragment);
-                Log.d("fragment", fragmentidt);
-                Log.d("fragment", "1");
 
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frame, fragment);
-                fragmentTransaction.commit();
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.frame, fragment)
+                        .commit();
 
                 break;
 
             case R.layout.weighin_detail:
                 abdToggle.setDrawerIndicatorEnabled(false);
-                WeighInDetailFragment wdf = new WeighInDetailFragment();
+                WeighInDetailFragment wdf = (WeighInDetailFragment) mFragmentManager.findFragmentByTag("FRAGMENT_1B");
+
+                if (wdf == null) {
+                    wdf = new WeighInDetailFragment();
+                    wdf.setArguments(bundle);
+                    mFragmentManager.beginTransaction()
+                            .replace(R.id.frame, wdf, "FRAGMENT_1B")
+                            .addToBackStack("FRAGMENT_1B")
+                            .commit();
+                } else {
+                    mFragmentManager.beginTransaction()
+                            .replace(R.id.frame, wdf, "FRAGMENT_1B")
+                            .commit();
+                 }
+
                 currentFragment = FRAGMENT_1B;
-                Log.d("fragment", "1B");
-                String fragmentidt2 = Integer.toString(currentFragment);
-                Log.d("fragment", fragmentidt2);
-                wdf.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame, wdf)
-                        .addToBackStack(null)
-                        .commit();
+
                 break;
 
             case R.id.my_goal:
-                GoalFragment gf = new GoalFragment();
+                GoalFragment gff = new GoalFragment();
                 if (bundle != null) {
-                    Log.d("argument", "customNavCall: bundle isnt null");
-                    gf.setArguments(bundle);
-                }
+                        gff.setArguments(bundle);
+                    }
+
                 currentFragment = FRAGMENT_2;
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame, gf, "goal_fragment")
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.frame, gff, "goal_fragment")
                         .commit();
 
         }
     }
 
     protected void onSaveInstanceState(Bundle outState) {
-        //super.onSaveInstanceState(outState);
-        String s = Integer.toString(currentFragment);
-        Log.d("fragment", s + "onsave");
+        super.onSaveInstanceState(outState);
         outState.putInt("currentFragment", currentFragment);
 
         if (currentFragment == FRAGMENT_1A) {
@@ -242,8 +139,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } else if (currentFragment == FRAGMENT_2) {
-            Log.d("argument", "onSaveInstance: isFragment 2");
-
 
             if (GoalFragment.ENTERED_WEIGHT > 0.0f) {
                 outState.putFloat("goal_weight", GoalFragment.ENTERED_WEIGHT);
@@ -252,12 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 String goal_date = GoalFragment.SELECTED_DATE.toString();
                 outState.putString("goal_date", goal_date);
             }
-            Log.d("argument", "isLOose = " + GoalFragment.isLoose);
             outState.putBoolean("goal_isloose", GoalFragment.isLoose);
-            Fragment fragment = getSupportFragmentManager().findFragmentByTag("goal_fragment");
-            getSupportFragmentManager().beginTransaction()
-                    .detach(fragment)
-                    .commitAllowingStateLoss();
 
         }
     }
@@ -265,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu
         getMenuInflater().inflate(R.menu.home
                 , menu);
         return true;
@@ -273,43 +163,34 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // Handle action bar clicks
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
         if (id == android.R.id.home) {
-            Log.d("back_ny", "onoption_main");
+            //Not implemented
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     public void onBackPressed() {
-        Log.d("back_ny", "onoption");
-        // Catch back action and pops from backstack
-        // (if you called previously to addToBackStack() in your transaction)
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
+        // Catches back action and pops from backstack
+        if (mFragmentManager.getBackStackEntryCount() > 0) {
+            mFragmentManager.popBackStack();
             currentFragment = FRAGMENT_1;
-            Log.d("fragment", "1");
         } else {
-            // Default action on back pressed
             super.onBackPressed();
         }
     }
 
+    //Restore the fragment which was presented on orientation change
     public void restoreFragmentFromSavedState(Bundle savedInstanceState) {
 
         currentFragment = savedInstanceState.getInt("currentFragment");
-        String cf = Integer.toString(savedInstanceState.getInt("currentFragment"));
-        Log.d("fragment", "savedinstace1");
-        Log.d("fragment", cf + " theFragmentRestored");
 
         int tempId = 0;
         if (currentFragment == 0) {
@@ -317,28 +198,22 @@ public class MainActivity extends AppCompatActivity {
         } else if (currentFragment == 1) {
             tempId = R.id.action_add;
 
-
             if (savedInstanceState.getFloat("entered_weight") != 0 || savedInstanceState.getParcelable("entered_photo") != null) {
                 Bundle restoreBundle = new Bundle();
 
                 if (savedInstanceState.getFloat("entered_weight") != 0) {
                     Float entered_weight = savedInstanceState.getFloat("entered_weight");
                     restoreBundle.putFloat("entered_weight", entered_weight);
-                    Log.d("argument", "hasFloat in Main");
                 }
 
                 if (savedInstanceState.getParcelable("entered_photo") != null) {
                     Bitmap bmp = savedInstanceState.getParcelable("entered_photo");
                     restoreBundle.putParcelable("entered_photo", bmp);
-                    Log.d("argument", "hasPhoto in Main");
-
                 }
 
                 customNavigationCall(tempId, restoreBundle);
 
             } else {
-                Log.d("argument", "hasNothing in main");
-
                 customNavigationCall(tempId, null);
             }
 
@@ -360,13 +235,97 @@ public class MainActivity extends AppCompatActivity {
                 bundleNew.putBoolean("isBackPressed", false);
                 customNavigationCall(R.id.home, bundleNew);
             } else {
-
                 customNavigationCall(tempId, null);
             }
 
         }
     }
 
+    public void initiateNavigation() {
+        // Initializing Toolbar and setting it as the actionbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //Initializing NavigationView
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        TextView mTextView = (TextView) findViewById(R.id.profile_label_text);
+        mTextView.setText("On a weight loss journey!");
+
+        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            // This method will trigger on item Click of navigation menu
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                if (menuItem.isChecked()) menuItem.setChecked(false);
+                else menuItem.setChecked(true);
+
+                //Closing drawer on item click
+                drawerLayout.closeDrawers();
+
+                //Check to see which item was being clicked and perform action for each item
+                switch (menuItem.getItemId()) {
+
+                    case R.id.progress:
+                        WeighInListFragment fragment = new WeighInListFragment();
+                        currentFragment = FRAGMENT_1;
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame, fragment);
+                        fragmentTransaction.commit();
+                        return true;
+
+                    case R.id.my_goal:
+                        GoalFragment gf = new GoalFragment();
+                        currentFragment = FRAGMENT_2;
+                        mFragmentManager.beginTransaction()
+                                .replace(R.id.frame, gf, "goal_fragment")
+                                .commit();
+
+                    default:
+                        return true;
+
+                }
+            }
+        });
+
+        // Initializing Drawer Layout and ActionBarToggle
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        abdToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+        };
+
+        //Setting the actionbarToggle to drawer layout
+        drawerLayout.setDrawerListener(abdToggle);
+
+        //Sync toggle
+        abdToggle.syncState();
+
+        //Handling backbutton visibility depending on back stack entry count
+        mFragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                String s = Integer.toString(mFragmentManager.getBackStackEntryCount());
+                if (mFragmentManager.getBackStackEntryCount() > 0) {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                } else {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    abdToggle.setDrawerIndicatorEnabled(true);
+
+                }
+            }
+        });
+
+        //Click listener for back button
+        abdToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+
+            }
+        });
+
+
+    }
 
 
 

@@ -3,7 +3,6 @@ package com.example.myfitnessjourney.Controller;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,20 +25,13 @@ import Services.WeighInLab;
 public class WeighInListFragment extends ListFragment {
     private ArrayList<WeighIn> mWeighIns;
 
-
-    public WeighInListFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getActivity().setTitle(R.string.weighin_list_fragment_title);
+        //Get all weighins from weighinlab and reverse the order so that the latest weighin comes first
         WeighInLab.get(getActivity()).getAllWeighIns(getActivity());
         mWeighIns = WeighInLab.get(getActivity()).getWeighins();
         Collections.reverse(mWeighIns);
-
-
         WeighInAdapter adapter = new WeighInAdapter(mWeighIns);
         setListAdapter(adapter);
         setHasOptionsMenu(true);
@@ -54,34 +46,25 @@ public class WeighInListFragment extends ListFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int itemId = item.getItemId();
-        String msg = Integer.toString(itemId);
-        Log.d("click", msg);
         switch (itemId) {
             case R.id.action_add:
+                //If user clicks on the plus sign, call navigationcaller
                 ((MainActivity) getActivity()).customNavigationCall(R.id.action_add, null);
-
                 break;
-
         }
-
         return true;
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
-        //get selected items
+        //If user clicks a weighin, get the id of the weighin and send as bundle to navigationcall
         WeighIn selectedWeighIn = (WeighIn) getListAdapter().getItem(position);
         int weighInId = selectedWeighIn.getId();
         MainActivity.SELECTED_WEIGHIN = weighInId;
         Bundle bundle = new Bundle();
         bundle.putInt("weighin_id", weighInId);
-
         ((MainActivity) getActivity()).customNavigationCall(R.layout.weighin_detail, bundle);
-
-
     }
 
     private class WeighInAdapter extends ArrayAdapter<WeighIn> {
@@ -89,19 +72,16 @@ public class WeighInListFragment extends ListFragment {
         ImageView weight_image;
         BitMapFactory bmf = new BitMapFactory();
 
-
         public WeighInAdapter(ArrayList<WeighIn> weighins) {
             super(getActivity(), 0, weighins);
 
         }
 
-
+        //return view for each item in list and set layout and data for all view objects.
         @Override
         public View getView(int position, View convertView, ViewGroup p) {
-            //If we weren't given a view, inflate one
             if (convertView == null) {
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.weighin_list_item, null);
-
             }
 
             WeighIn w = getItem(position);
@@ -122,13 +102,10 @@ public class WeighInListFragment extends ListFragment {
                 weight_image.setImageBitmap(bmf.createBitmapFromFilePath(w.getPicturePath()));
             }
 
-
-
             return convertView;
-
         }
 
-
+        //Method to get days since last weighin
         public String getDaysSinceWeighIn(Date date) {
 
             long timeOne = date.getTime();

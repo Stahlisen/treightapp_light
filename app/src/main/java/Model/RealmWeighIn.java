@@ -6,6 +6,7 @@ import io.realm.RealmObject;
 
 /**
  * Created by fredrikstahl on 15-07-30.
+ * Class that acts as a constructor for a Realm goal object, see Realm API.
  */
 public class RealmWeighIn extends RealmObject{
 

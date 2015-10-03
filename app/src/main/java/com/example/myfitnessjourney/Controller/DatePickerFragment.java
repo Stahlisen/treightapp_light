@@ -7,10 +7,11 @@ import android.os.Bundle;
 
 /**
  * Created by fredrikstahl on 15-08-07.
+ * Following class displays a dialog for setting a date
  */
 public class DatePickerFragment extends DialogFragment {
 
-    DatePickerDialog.OnDateSetListener ondateSet;
+    private DatePickerDialog.OnDateSetListener ondateSet;
     private int year, month, day;
 
     public DatePickerFragment() {
