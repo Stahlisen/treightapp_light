@@ -111,10 +111,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.my_goal:
-                GoalFragment gff = new GoalFragment();
+                GoalFragment gff = (GoalFragment) mFragmentManager.findFragmentByTag("goal_fragment");
+                if (gff == null) {
+                    gff = new GoalFragment();
+                }
+                /*
                 if (bundle != null) {
                         gff.setArguments(bundle);
                     }
+                    */
 
                 currentFragment = FRAGMENT_2;
                 mFragmentManager.beginTransaction()

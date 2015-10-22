@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:text="86KG"
         android:textStyle="bold"
+        android:textColor="@color/green_2"
         android:layout_toRightOf="@id/your_goal_desc"
         android:paddingTop="40dp"
         android:paddingBottom="40dp"

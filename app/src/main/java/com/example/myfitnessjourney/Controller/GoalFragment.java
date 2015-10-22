@@ -31,21 +31,19 @@ public class GoalFragment extends Fragment {
     private ToggleButton goal_type_toggle;
     private TextView mWeightValue, mDateValue;
     private Button mSaveButton;
-    private DatePicker mDatePicker;
-    private Calendar calendar;
-    private float weight_goal;
-    private Date date_goal;
     private int selectedConstant;
     private float convertedFloat;
     private boolean didSetWeight = false;
     private boolean didSetDate = false;
-    final static int DATE_PICKER_ID = 0;
-    private int mYear, mMonth, mDay;
     public static Date SELECTED_DATE;
     public static float SELECTED_WEIGHT;
-    public static boolean isLoose = true;
+    public static boolean isLoose;
     public static float ENTERED_WEIGHT;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
@@ -64,12 +62,16 @@ public class GoalFragment extends Fragment {
         mSaveButton = (Button) view.findViewById(R.id.save_goal_btn);
         mSaveButton.setEnabled(false);
 
-        //attempt to restore data on rotation with bundle as arguments
-        Bundle restoreBundle = getArguments();
-        if (restoreBundle != null) {
-            float restored_weight = restoreBundle.getFloat("goal_weight");
-            String weight_value = Float.toString(restored_weight);
-            mWeightValue.setText(weight_value);
+        //Check if there's a saved instance
+        if (savedInstanceState != null) {
+            ENTERED_WEIGHT = savedInstanceState.getFloat("lastEnteredWeight");
+            isLoose = savedInstanceState.getBoolean("lastEnteredType");
+            if (ENTERED_WEIGHT > 0f) {
+                String lastEnteredWeight = Float.toString(ENTERED_WEIGHT);
+                mWeightValue.setText(lastEnteredWeight + " KG");
+            } else {
+                initializeGoalData();
+            }
         } else {
             initializeGoalData();
         }
@@ -110,8 +112,17 @@ public class GoalFragment extends Fragment {
             }
         });
 
-
         return view;
+    }
+
+    //Save data on configuration change
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putFloat("lastEnteredWeight", ENTERED_WEIGHT);
+        outState.putBoolean("lastSetType", isLoose);
+
     }
 
     //Get goal data from internal storage if goal data has been set before (if it exists in storage)
@@ -122,7 +133,6 @@ public class GoalFragment extends Fragment {
             mDateValue.setText("");
         } else {
             mWeightValue.setText(Float.toString(goal.getWeight()) + " KG");
-            mWeightValue.setTextColor(getResources().getColor(R.color.green_2));
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy");
             String dateString = sdf.format(goal.getDate());
             mDateValue.setText(dateString);
@@ -220,7 +230,7 @@ public class GoalFragment extends Fragment {
                 String s = Float.toString(convertedFloat);
                 mWeightValue.setText(s + " KG");
                 ENTERED_WEIGHT = convertedFloat;
-                mWeightValue.setTextColor(getResources().getColor(R.color.green_2));
+                //mWeightValue.setTextColor(getResources().getColor(R.color.green_2));
                 didSetWeight = true;
                 enableSaveIfDataEntered();
                 d.dismiss();
