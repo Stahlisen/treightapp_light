@@ -94,10 +94,24 @@
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
 
+    <TextView
+        android:id="@+id/your_photo_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/your_photo_hint"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:textSize="12sp"
+        android:layout_marginTop="15dp"
+        />
+
     <ImageView
         android:id="@+id/photo_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:src="@drawable/browse_button"/>
 
 
 

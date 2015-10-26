@@ -143,17 +143,6 @@ public class MainActivity extends AppCompatActivity {
                 outState.putParcelable("entered_photo", NewWeighInFragment.ENTERED_PHOTO);
             }
 
-        } else if (currentFragment == FRAGMENT_2) {
-
-            if (GoalFragment.ENTERED_WEIGHT > 0.0f) {
-                outState.putFloat("goal_weight", GoalFragment.ENTERED_WEIGHT);
-            }
-            if (GoalFragment.SELECTED_DATE != null) {
-                String goal_date = GoalFragment.SELECTED_DATE.toString();
-                outState.putString("goal_date", goal_date);
-            }
-            outState.putBoolean("goal_isloose", GoalFragment.isLoose);
-
         }
     }
 
@@ -224,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (currentFragment == 2) {
             tempId = R.layout.weighin_detail;
-            customNavigationCall(tempId, savedInstanceState);
+            customNavigationCall(tempId, null);
 
         } else if (currentFragment == 3) {
             tempId = R.id.my_goal;

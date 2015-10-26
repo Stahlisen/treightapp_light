@@ -18,6 +18,7 @@
     <string name="weight_enter_hint">Enter your current weight</string>
     <string name="picture_label">PICTURE</string>
     <string name="picture_enter_hint">Take a picture or choose from gallery</string>
+    <string name="your_photo_hint">Your photo</string>
     
     <string-array name="views">
         <item>Home/My Profile</item>

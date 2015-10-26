@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -32,11 +34,13 @@ public class GoalFragment extends Fragment {
     private TextView mWeightValue, mDateValue;
     private Button mSaveButton;
     private int selectedConstant;
+    private float selectedDecimal;
     private float convertedFloat;
     private boolean didSetWeight = false;
     private boolean didSetDate = false;
+    private boolean didSetType = false;
     public static Date SELECTED_DATE;
-    public static float SELECTED_WEIGHT;
+    private String SELECTED_DATE_String;
     public static boolean isLoose;
     public static float ENTERED_WEIGHT;
 
@@ -62,25 +66,48 @@ public class GoalFragment extends Fragment {
         mSaveButton = (Button) view.findViewById(R.id.save_goal_btn);
         mSaveButton.setEnabled(false);
 
+        initializeGoalData();
         //Check if there's a saved instance
         if (savedInstanceState != null) {
             ENTERED_WEIGHT = savedInstanceState.getFloat("lastEnteredWeight");
             isLoose = savedInstanceState.getBoolean("lastEnteredType");
+            SELECTED_DATE_String = savedInstanceState.getString("lastEnteredDate");
+            if (SELECTED_DATE_String != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy");
+                try {
+                    SELECTED_DATE = sdf.parse(SELECTED_DATE_String);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
             if (ENTERED_WEIGHT > 0f) {
                 String lastEnteredWeight = Float.toString(ENTERED_WEIGHT);
                 mWeightValue.setText(lastEnteredWeight + " KG");
-            } else {
-                initializeGoalData();
+                Log.d("log_goal", lastEnteredWeight);
             }
-        } else {
-            initializeGoalData();
+            goal_type_toggle.setChecked(isLoose);
+            if (isLoose) {
+                Log.d("log_goal", "true");
+            } else {
+                Log.d("log_goal", "false");
+            }
+
+            if (SELECTED_DATE_String != null) {
+                mDateValue.setText(SELECTED_DATE_String);
+                Log.d("log_goal", SELECTED_DATE_String);
+            }
         }
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Goal goal = new Goal(convertedFloat, SELECTED_DATE, isLoose);
+                Goal goal = new Goal(ENTERED_WEIGHT, SELECTED_DATE, isLoose);
                 WeighInLab.get(getActivity()).createNewRealmGoal(goal);
+                didSetType = false;
+                didSetDate = false;
+                didSetWeight = false;
+                enableSaveIfDataEntered();
             }
         });
 
@@ -102,6 +129,7 @@ public class GoalFragment extends Fragment {
         goal_type_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                didSetType = true;
 
                 if (isChecked) {
                     isLoose = false;
@@ -109,6 +137,8 @@ public class GoalFragment extends Fragment {
                 } else {
                     isLoose = true;
                 }
+
+                enableSaveIfDataEntered();
             }
         });
 
@@ -121,7 +151,8 @@ public class GoalFragment extends Fragment {
         super.onSaveInstanceState(outState);
 
         outState.putFloat("lastEnteredWeight", ENTERED_WEIGHT);
-        outState.putBoolean("lastSetType", isLoose);
+        outState.putBoolean("lastEnteredType", isLoose);
+        outState.putString("lastEnteredDate", SELECTED_DATE_String);
 
     }
 
@@ -131,6 +162,7 @@ public class GoalFragment extends Fragment {
         if (goal == null) {
             mWeightValue.setText("");
             mDateValue.setText("");
+            goal_type_toggle.setChecked(false);
         } else {
             mWeightValue.setText(Float.toString(goal.getWeight()) + " KG");
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy");
@@ -172,8 +204,8 @@ public class GoalFragment extends Fragment {
             SELECTED_DATE = cal.getTime();
 
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy");
-            String dateString = sdf.format(SELECTED_DATE);
-            mDateValue.setText(dateString);
+            SELECTED_DATE_String = sdf.format(SELECTED_DATE);
+            mDateValue.setText(SELECTED_DATE_String);
             didSetDate = true;
             enableSaveIfDataEntered();
         }
@@ -181,6 +213,8 @@ public class GoalFragment extends Fragment {
 
     //Show weight editor as a dialog
     public void showWeightEditor() {
+        selectedConstant = 0;
+        selectedDecimal = 0;
         final Dialog d = new Dialog(getActivity());
         d.setTitle("Goal weight");
         d.setContentView(R.layout.weight_picker_dialog);
@@ -216,7 +250,7 @@ public class GoalFragment extends Fragment {
             public void onValueChange(NumberPicker picker, int oldValb, int newValb) {
                 int index = picker.getValue();
                 String val = decimals[index];
-                SELECTED_WEIGHT = Float.parseFloat(val);
+                selectedDecimal = Float.parseFloat(val);
 
             }
 
@@ -225,12 +259,10 @@ public class GoalFragment extends Fragment {
         button_set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Float tempfloat = new Float(selectedConstant);
-                convertedFloat = tempfloat + SELECTED_WEIGHT;
-                String s = Float.toString(convertedFloat);
-                mWeightValue.setText(s + " KG");
+                convertedFloat = selectedConstant + selectedDecimal;
+                String selected_value_string = Float.toString(convertedFloat);
+                mWeightValue.setText(selected_value_string + " KG");
                 ENTERED_WEIGHT = convertedFloat;
-                //mWeightValue.setTextColor(getResources().getColor(R.color.green_2));
                 didSetWeight = true;
                 enableSaveIfDataEntered();
                 d.dismiss();
@@ -246,7 +278,7 @@ public class GoalFragment extends Fragment {
 
         if (didSetWeight) {
             np_constant.setValue(selectedConstant);
-            String s = Float.toString(SELECTED_WEIGHT);
+            String s = Float.toString(ENTERED_WEIGHT);
             int index = Arrays.asList(decimals).indexOf(s);
             np_decimal.setValue(index);
 
@@ -259,7 +291,7 @@ public class GoalFragment extends Fragment {
     //Enable save button if any data was entered
     public void enableSaveIfDataEntered() {
 
-        if (didSetDate && didSetWeight) {
+        if (didSetDate || didSetWeight || didSetType) {
             mSaveButton.setEnabled(true);
         } else {
             mSaveButton.setEnabled(false);

@@ -31,9 +31,13 @@ public class WeighInDetailFragment extends Fragment {
         setHasOptionsMenu(true);
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        if (savedInstanceState != null) {
+            mId = savedInstanceState.getInt("weighinIndex");
+        } else {
+            mId = getArguments().getInt("weighin_id");
+        }
 
         //Get the selected id from arguments and set all view elements
-        mId = getArguments().getInt("weighin_id");
         bmf = new BitMapFactory();
         selectedWeighIn = WeighInLab.get(getActivity()).getWeighInWithId(mId);
         WEIGHINTITLE = "WEIGHIN #" + selectedWeighIn.getId();
@@ -62,6 +66,13 @@ public class WeighInDetailFragment extends Fragment {
 
         return view;
 
+    }
+
+    //Save data on configuration change
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("weighinIndex", mId);
     }
 
     @Override

@@ -74,6 +74,24 @@ public class NewWeighInFragment extends Fragment {
         //Create listeners
         createListeners();
 
+        //Check for saved instance
+        if (savedInstanceState != null) {
+            ENTERED_WEIGHT = savedInstanceState.getFloat("lastEnteredWeight");
+            ENTERED_PHOTO = savedInstanceState.getParcelable("lastEnteredPhoto");
+
+            if (ENTERED_WEIGHT > 0.0f) {
+                String ENTERED_WEIGHT_String = Float.toString(ENTERED_WEIGHT);
+                mEditWeight.setText(ENTERED_WEIGHT_String + " KG");
+                mEditWeight.setTextColor(getResources().getColor(R.color.green_2));
+            }
+
+            if (ENTERED_PHOTO != null) {
+                mPhotoView.setImageBitmap(ENTERED_PHOTO);
+            }
+
+        }
+
+        /*
         //If arguments is not null, get the entered weight and photo
         Bundle bl = getArguments();
         if (bl != null) {
@@ -92,6 +110,7 @@ public class NewWeighInFragment extends Fragment {
             mEditWeight.setTextColor(getResources().getColor(R.color.green_2));
         }
         mPhotoView.setImageBitmap(ENTERED_PHOTO);
+        */
 
         return view;
 
@@ -355,6 +374,14 @@ public class NewWeighInFragment extends Fragment {
         weighin.setDate(new Date());
         weighin.setWeight(ENTERED_WEIGHT);
         return weighin;
+    }
+
+    //Save data on configuration change
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putFloat("lastEnteredWeight", ENTERED_WEIGHT);
+        outState.putParcelable("lastEnteredPhoto", ENTERED_PHOTO);
     }
 
     @Override

@@ -345,6 +345,7 @@
     <string name="weighin_list_fragment_title">My Journey</string>
     <string name="weight_enter_hint">Enter your current weight</string>
     <string name="weight_label">WEIGHT</string>
+    <string name="your_photo_hint">Your photo</string>
     <!-- From: file:/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
