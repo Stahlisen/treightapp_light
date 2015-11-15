@@ -27,6 +27,7 @@
         android:theme="@style/AppBaseTheme" >
         <activity
             android:name="com.example.myfitnessjourney.Controller.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:label="MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

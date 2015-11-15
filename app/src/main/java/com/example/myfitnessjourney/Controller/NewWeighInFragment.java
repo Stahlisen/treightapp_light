@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -53,66 +54,23 @@ public class NewWeighInFragment extends Fragment {
     public static float ENTERED_WEIGHT;
     public static Bitmap ENTERED_PHOTO;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         super.onCreateView(inflater, parent, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_new_weighin, parent, false);
+        FrameLayout frameLayout = new FrameLayout(getActivity());
+        populateViewForOrientation(inflater, frameLayout);
+        //View view = inflater.inflate(R.layout.fragment_new_weighin, parent, false);
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
         setHasOptionsMenu(true);
 
-        //Initialize all view elements
-        mEditWeight = (TextView) view.findViewById(R.id.weight_edit);
-        mEditPicture = (TextView) view.findViewById(R.id.picture_edit);
-        mChooseWeight = (ImageButton) view.findViewById(R.id.weight_edit_button);
-        mTakePicture = (ImageButton) view.findViewById(R.id.take_picture_button);
-        mBrowsePicture = (ImageButton) view.findViewById(R.id.browse_gallery_image_button);
-        //Se kommentar på metoden pickPhoto()
-        mBrowsePicture.setEnabled(false);
-        mPhotoView = (ImageView) view.findViewById(R.id.photo_view);
-        //Create listeners
-        createListeners();
-
-        //Check for saved instance
-        if (savedInstanceState != null) {
-            ENTERED_WEIGHT = savedInstanceState.getFloat("lastEnteredWeight");
-            ENTERED_PHOTO = savedInstanceState.getParcelable("lastEnteredPhoto");
-
-            if (ENTERED_WEIGHT > 0.0f) {
-                String ENTERED_WEIGHT_String = Float.toString(ENTERED_WEIGHT);
-                mEditWeight.setText(ENTERED_WEIGHT_String + " KG");
-                mEditWeight.setTextColor(getResources().getColor(R.color.green_2));
-            }
-
-            if (ENTERED_PHOTO != null) {
-                mPhotoView.setImageBitmap(ENTERED_PHOTO);
-            }
-
-        }
-
-        /*
-        //If arguments is not null, get the entered weight and photo
-        Bundle bl = getArguments();
-        if (bl != null) {
-            if (getArguments().containsKey("entered_weight")) {
-                ENTERED_WEIGHT = getArguments().getFloat("entered_weight");
-            }
-
-            if (getArguments().containsKey("entered_photo")) {
-                ENTERED_PHOTO = getArguments().getParcelable("entered_photo");
-            }
-        }
-
-        if (ENTERED_WEIGHT > 0.0f) {
-            String entered_weight_text = Float.toString(ENTERED_WEIGHT);
-            mEditWeight.setText(entered_weight_text + " KG");
-            mEditWeight.setTextColor(getResources().getColor(R.color.green_2));
-        }
-        mPhotoView.setImageBitmap(ENTERED_PHOTO);
-        */
-
-        return view;
+        return frameLayout;
 
     }
 
@@ -146,6 +104,7 @@ public class NewWeighInFragment extends Fragment {
 
                     WeighInLab.get(getActivity()).createNewRealmWeighIn(weighin, getActivity().getApplicationContext());
                     ENTERED_WEIGHT = 0;
+                    ENTERED_PHOTO = null;
                     ((MainActivity) getActivity()).customNavigationCall(R.id.home, null);
 
                 } else {
@@ -156,6 +115,43 @@ public class NewWeighInFragment extends Fragment {
                 return true;
         }
         return false;
+    }
+
+    private void populateViewForOrientation (LayoutInflater inflater, ViewGroup viewGroup) {
+        viewGroup.removeAllViewsInLayout();
+        View view = inflater.inflate(R.layout.fragment_new_weighin, viewGroup);
+
+        //Initialize all view elements
+        mEditWeight = (TextView) view.findViewById(R.id.weight_edit);
+        mEditPicture = (TextView) view.findViewById(R.id.picture_edit);
+        mChooseWeight = (ImageButton) view.findViewById(R.id.weight_edit_button);
+        mTakePicture = (ImageButton) view.findViewById(R.id.take_picture_button);
+        mBrowsePicture = (ImageButton) view.findViewById(R.id.browse_gallery_image_button);
+
+        //Se kommentar på metoden pickPhoto()
+        mBrowsePicture.setEnabled(false);
+        mPhotoView = (ImageView) view.findViewById(R.id.photo_view);
+
+        //Create listeners
+        createListeners();
+
+        if (ENTERED_WEIGHT > 0.0f) {
+            String ENTERED_WEIGHT_String = Float.toString(ENTERED_WEIGHT);
+            mEditWeight.setText(ENTERED_WEIGHT_String + " KG");
+        }
+
+        if (ENTERED_PHOTO != null) {
+            mPhotoView.setImageBitmap(ENTERED_PHOTO);
+        }
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        populateViewForOrientation(inflater, (ViewGroup) getView());
+
     }
 
 

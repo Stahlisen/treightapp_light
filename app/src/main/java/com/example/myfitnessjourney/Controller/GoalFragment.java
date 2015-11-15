@@ -2,21 +2,23 @@ package com.example.myfitnessjourney.Controller;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -43,19 +45,32 @@ public class GoalFragment extends Fragment {
     private String SELECTED_DATE_String;
     public static boolean isLoose;
     public static float ENTERED_WEIGHT;
+    private boolean configDidChange;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("log_1", "onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
-
         super.onCreateView(inflater, parent, savedInstanceState);
-        View view = inflater.inflate(R.layout.goal_fragment, parent, false);
+        FrameLayout frameLayout = new FrameLayout(getActivity());
+        populateViewForOrientation(inflater, frameLayout);
+        //View view = inflater.inflate(R.layout.goal_fragment, parent, false);
         setHasOptionsMenu(true);
+
+        initializeGoalData();
+        Log.d("log_1", "onCreateView");
+
+        return frameLayout;
+    }
+
+    private void populateViewForOrientation (LayoutInflater inflater, ViewGroup viewGroup) {
+        viewGroup.removeAllViewsInLayout();
+        View view = inflater.inflate(R.layout.goal_fragment, viewGroup);
 
         //Intialize view elements
         edit_weight = (ImageButton) view.findViewById(R.id.button_change_goal);
@@ -65,39 +80,26 @@ public class GoalFragment extends Fragment {
         mDateValue = (TextView) view.findViewById(R.id.your_goal_date_value);
         mSaveButton = (Button) view.findViewById(R.id.save_goal_btn);
         mSaveButton.setEnabled(false);
+        Log.d("log_1", "populateViewForOrientation");
 
-        initializeGoalData();
-        //Check if there's a saved instance
-        if (savedInstanceState != null) {
-            ENTERED_WEIGHT = savedInstanceState.getFloat("lastEnteredWeight");
-            isLoose = savedInstanceState.getBoolean("lastEnteredType");
-            SELECTED_DATE_String = savedInstanceState.getString("lastEnteredDate");
-            if (SELECTED_DATE_String != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy");
-                try {
-                    SELECTED_DATE = sdf.parse(SELECTED_DATE_String);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            if (ENTERED_WEIGHT > 0f) {
-                String lastEnteredWeight = Float.toString(ENTERED_WEIGHT);
-                mWeightValue.setText(lastEnteredWeight + " KG");
-                Log.d("log_goal", lastEnteredWeight);
-            }
-            goal_type_toggle.setChecked(isLoose);
+        if (configDidChange) {
+            Log.d("log_1", "configDidchange");
+            mWeightValue.setText(Float.toString(ENTERED_WEIGHT) + " KG");
+            SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy");
+            String dateString = sdf.format(SELECTED_DATE);
+            mDateValue.setText(dateString);
+
             if (isLoose) {
-                Log.d("log_goal", "true");
+                goal_type_toggle.setChecked(false);
             } else {
-                Log.d("log_goal", "false");
+                goal_type_toggle.setChecked(true);
             }
-
-            if (SELECTED_DATE_String != null) {
-                mDateValue.setText(SELECTED_DATE_String);
-                Log.d("log_goal", SELECTED_DATE_String);
-            }
+            enableSaveIfDataEntered();
         }
+
+
+
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,17 +144,14 @@ public class GoalFragment extends Fragment {
             }
         });
 
-        return view;
     }
 
-    //Save data on configuration change
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putFloat("lastEnteredWeight", ENTERED_WEIGHT);
-        outState.putBoolean("lastEnteredType", isLoose);
-        outState.putString("lastEnteredDate", SELECTED_DATE_String);
+    public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+        configDidChange = true;
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        populateViewForOrientation(inflater, (ViewGroup) getView());
 
     }
 
@@ -164,6 +163,9 @@ public class GoalFragment extends Fragment {
             mDateValue.setText("");
             goal_type_toggle.setChecked(false);
         } else {
+            ENTERED_WEIGHT = goal.getWeight();
+            SELECTED_DATE = goal.getDate();
+            isLoose = goal.isLoose();
             mWeightValue.setText(Float.toString(goal.getWeight()) + " KG");
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy");
             String dateString = sdf.format(goal.getDate());
@@ -218,6 +220,12 @@ public class GoalFragment extends Fragment {
         final Dialog d = new Dialog(getActivity());
         d.setTitle("Goal weight");
         d.setContentView(R.layout.weight_picker_dialog);
+        if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            WindowManager.LayoutParams params = d.getWindow().getAttributes();
+            params.width = WindowManager.LayoutParams.MATCH_PARENT;
+            params.height =  WindowManager.LayoutParams.MATCH_PARENT;
+            d.getWindow().setAttributes(params);
+        }
         Button button_cancel = (Button) d.findViewById(R.id.button_cancel);
         Button button_set = (Button) d.findViewById(R.id.button_set);
         final NumberPicker np_constant = (NumberPicker) d.findViewById(R.id.numberPicker_constant);
@@ -293,6 +301,7 @@ public class GoalFragment extends Fragment {
 
         if (didSetDate || didSetWeight || didSetType) {
             mSaveButton.setEnabled(true);
+            Log.d("log_1", "isEnabled");
         } else {
             mSaveButton.setEnabled(false);
         }

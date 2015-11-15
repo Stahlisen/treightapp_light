@@ -10,5 +10,10 @@
     <color name="PrimaryColor">#388E3C</color>
     <color name="PrimaryDarkColor">#1B5E20</color>
     <color name="red">#F44336</color>
+
+    <color name="blue_1">#03A9F4</color>
+    <color name="blue_accent">#B3E5FC</color>
+    <color name="blue_text">#01579B</color>
+
     
 </resources>

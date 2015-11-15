@@ -1,6 +1,5 @@
 package com.example.myfitnessjourney.Controller;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,18 +36,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.test_main_activity);
         //Realm.deleteRealmFile(this);
         mFragmentManager = getSupportFragmentManager();
-        initiateNavigation();
+        initializeNavigation();
 
-        //If there is a savedInstance, restore fragment from saved state
-        if (savedInstanceState != null) {
-            restoreFragmentFromSavedState(savedInstanceState);
-
-
-        } else {
             Bundle bundleNew = new Bundle();
             bundleNew.putBoolean("isBackPressed", false);
             customNavigationCall(R.id.home, bundleNew);
-        }
+            Log.d("log_1", "isntSavedInstance");
+
+
 
     }
 
@@ -55,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     public void customNavigationCall(int itemId, Bundle bundle) {
 
         switch (itemId) {
-
 
             case R.id.action_add:
                 abdToggle.setDrawerIndicatorEnabled(false);
@@ -115,11 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 if (gff == null) {
                     gff = new GoalFragment();
                 }
-                /*
-                if (bundle != null) {
-                        gff.setArguments(bundle);
-                    }
-                    */
 
                 currentFragment = FRAGMENT_2;
                 mFragmentManager.beginTransaction()
@@ -180,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-
+    /*
     //Restore the fragment which was presented on orientation change
     public void restoreFragmentFromSavedState(Bundle savedInstanceState) {
 
@@ -234,8 +224,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+    */
 
-    public void initiateNavigation() {
+    public void initializeNavigation() {
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
