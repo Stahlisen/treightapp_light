@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
+import Model.RealmAlarm;
 import Model.RealmGoal;
 import Model.RealmWeighIn;
 
@@ -23,8 +24,9 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     private static final List<Class<? extends RealmObject>> MODEL_CLASSES;
     static {
         List<Class<? extends RealmObject>> modelClasses = new ArrayList<Class<? extends RealmObject>>();
-        modelClasses.add(RealmWeighIn.class);
+        modelClasses.add(RealmAlarm.class);
         modelClasses.add(RealmGoal.class);
+        modelClasses.add(RealmWeighIn.class);
         MODEL_CLASSES = Collections.unmodifiableList(modelClasses);
     }
 
@@ -32,10 +34,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public Table createTable(Class<? extends RealmObject> clazz, ImplicitTransaction transaction) {
         checkClass(clazz);
 
-        if (clazz.equals(RealmWeighIn.class)) {
-            return RealmWeighInRealmProxy.initTable(transaction);
+        if (clazz.equals(RealmAlarm.class)) {
+            return RealmAlarmRealmProxy.initTable(transaction);
         } else if (clazz.equals(RealmGoal.class)) {
             return RealmGoalRealmProxy.initTable(transaction);
+        } else if (clazz.equals(RealmWeighIn.class)) {
+            return RealmWeighInRealmProxy.initTable(transaction);
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -45,10 +49,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public void validateTable(Class<? extends RealmObject> clazz, ImplicitTransaction transaction) {
         checkClass(clazz);
 
-        if (clazz.equals(RealmWeighIn.class)) {
-            RealmWeighInRealmProxy.validateTable(transaction);
+        if (clazz.equals(RealmAlarm.class)) {
+            RealmAlarmRealmProxy.validateTable(transaction);
         } else if (clazz.equals(RealmGoal.class)) {
             RealmGoalRealmProxy.validateTable(transaction);
+        } else if (clazz.equals(RealmWeighIn.class)) {
+            RealmWeighInRealmProxy.validateTable(transaction);
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -58,10 +64,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public List<String> getFieldNames(Class<? extends RealmObject> clazz) {
         checkClass(clazz);
 
-        if (clazz.equals(RealmWeighIn.class)) {
-            return RealmWeighInRealmProxy.getFieldNames();
+        if (clazz.equals(RealmAlarm.class)) {
+            return RealmAlarmRealmProxy.getFieldNames();
         } else if (clazz.equals(RealmGoal.class)) {
             return RealmGoalRealmProxy.getFieldNames();
+        } else if (clazz.equals(RealmWeighIn.class)) {
+            return RealmWeighInRealmProxy.getFieldNames();
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -71,10 +79,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public String getTableName(Class<? extends RealmObject> clazz) {
         checkClass(clazz);
 
-        if (clazz.equals(RealmWeighIn.class)) {
-            return RealmWeighInRealmProxy.getTableName();
+        if (clazz.equals(RealmAlarm.class)) {
+            return RealmAlarmRealmProxy.getTableName();
         } else if (clazz.equals(RealmGoal.class)) {
             return RealmGoalRealmProxy.getTableName();
+        } else if (clazz.equals(RealmWeighIn.class)) {
+            return RealmWeighInRealmProxy.getTableName();
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -84,10 +94,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public <E extends RealmObject> E newInstance(Class<E> clazz) {
         checkClass(clazz);
 
-        if (clazz.equals(RealmWeighIn.class)) {
-            return clazz.cast(new RealmWeighInRealmProxy());
+        if (clazz.equals(RealmAlarm.class)) {
+            return clazz.cast(new RealmAlarmRealmProxy());
         } else if (clazz.equals(RealmGoal.class)) {
             return clazz.cast(new RealmGoalRealmProxy());
+        } else if (clazz.equals(RealmWeighIn.class)) {
+            return clazz.cast(new RealmWeighInRealmProxy());
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -102,10 +114,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
     public Map<String, Long> getColumnIndices(Class<? extends RealmObject> clazz) {
         checkClass(clazz);
 
-        if (clazz.equals(RealmWeighIn.class)) {
-            return RealmWeighInRealmProxy.getColumnIndices();
+        if (clazz.equals(RealmAlarm.class)) {
+            return RealmAlarmRealmProxy.getColumnIndices();
         } else if (clazz.equals(RealmGoal.class)) {
             return RealmGoalRealmProxy.getColumnIndices();
+        } else if (clazz.equals(RealmWeighIn.class)) {
+            return RealmWeighInRealmProxy.getColumnIndices();
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -117,10 +131,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         // generated by RealmProxy or the original type extending directly from RealmObject
         @SuppressWarnings("unchecked") Class<E> clazz = (Class<E>) ((obj instanceof RealmObjectProxy) ? obj.getClass().getSuperclass() : obj.getClass());
 
-        if (clazz.equals(RealmWeighIn.class)) {
-            return clazz.cast(RealmWeighInRealmProxy.copyOrUpdate(realm, (RealmWeighIn) obj, update, cache));
+        if (clazz.equals(RealmAlarm.class)) {
+            return clazz.cast(RealmAlarmRealmProxy.copyOrUpdate(realm, (RealmAlarm) obj, update, cache));
         } else if (clazz.equals(RealmGoal.class)) {
             return clazz.cast(RealmGoalRealmProxy.copyOrUpdate(realm, (RealmGoal) obj, update, cache));
+        } else if (clazz.equals(RealmWeighIn.class)) {
+            return clazz.cast(RealmWeighInRealmProxy.copyOrUpdate(realm, (RealmWeighIn) obj, update, cache));
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -131,10 +147,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         throws JSONException {
         checkClass(clazz);
 
-        if (clazz.equals(RealmWeighIn.class)) {
-            return clazz.cast(RealmWeighInRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
+        if (clazz.equals(RealmAlarm.class)) {
+            return clazz.cast(RealmAlarmRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
         } else if (clazz.equals(RealmGoal.class)) {
             return clazz.cast(RealmGoalRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
+        } else if (clazz.equals(RealmWeighIn.class)) {
+            return clazz.cast(RealmWeighInRealmProxy.createOrUpdateUsingJsonObject(realm, json, update));
         } else {
             throw getMissingProxyClassException(clazz);
         }
@@ -145,10 +163,12 @@ class DefaultRealmModuleMediator extends RealmProxyMediator {
         throws IOException {
         checkClass(clazz);
 
-        if (clazz.equals(RealmWeighIn.class)) {
-            return clazz.cast(RealmWeighInRealmProxy.createUsingJsonStream(realm, reader));
+        if (clazz.equals(RealmAlarm.class)) {
+            return clazz.cast(RealmAlarmRealmProxy.createUsingJsonStream(realm, reader));
         } else if (clazz.equals(RealmGoal.class)) {
             return clazz.cast(RealmGoalRealmProxy.createUsingJsonStream(realm, reader));
+        } else if (clazz.equals(RealmWeighIn.class)) {
+            return clazz.cast(RealmWeighInRealmProxy.createUsingJsonStream(realm, reader));
         } else {
             throw getMissingProxyClassException(clazz);
         }

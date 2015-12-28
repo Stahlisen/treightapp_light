@@ -6,28 +6,4 @@
     android:background="@color/text_white"
     android:layout_margin="10dp">
 
-    <TextView
-        style="@style/home_list_item"
-        android:id="@+id/activity_days_ago"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="17dp"
-        android:padding="20sp"
-        android:text="2 days ago"
-        android:textColor="@color/text_black"/>
-
-    <TextView
-        style="@style/home_list_item"
-        android:id="@+id/activity_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/activity_days_ago"
-        android:layout_alignBottom="@+id/activity_days_ago"
-        android:layout_alignParentLeft="true"
-        android:padding="20sp"
-        android:text="Changed your goal to 45 kg"
-        android:textColor="@color/text_black"/>
-
 </RelativeLayout><!-- From: file:/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/src/main/res/layout/item_list_home.xml -->

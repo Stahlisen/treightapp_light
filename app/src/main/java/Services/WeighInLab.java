@@ -1,11 +1,15 @@
 package Services;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import Model.Alarm;
 import Model.Goal;
+import Model.RealmAlarm;
 import Model.RealmGoal;
 import Model.RealmWeighIn;
 import Model.WeighIn;
@@ -38,7 +42,7 @@ public class WeighInLab {
     }
 
     //Method to get all weighins stored
-    public void getAllWeighIns(Context context) {
+    public List<WeighIn> getAllWeighIns(Context context) {
         mWeighins.clear();
         Realm realm = Realm.getInstance(context);
         RealmQuery<RealmWeighIn> query = realm.where(RealmWeighIn.class);
@@ -52,6 +56,8 @@ public class WeighInLab {
             w.setPicturePath(i.getPicturefilepath());
             mWeighins.add(w);
         }
+        realm.close();
+        return mWeighins;
     }
 
     //Method to create a new realm weighin from the weighin object passed as a parameter
@@ -70,11 +76,11 @@ public class WeighInLab {
         o.setWeight(weight);
         o.setDate(new Date());
         realm.commitTransaction();
+        realm.close();
     }
 
     //Method to create a new realm goal from a goal object
     public void createNewRealmGoal(Goal goal) {
-
         Realm realm = Realm.getInstance(mAppContext);
         realm.beginTransaction();
         RealmGoal rg = realm.createObject(RealmGoal.class);
@@ -82,6 +88,45 @@ public class WeighInLab {
         rg.setGoaldate(goal.getDate());
         rg.setIsLoose(goal.isLoose());
         realm.commitTransaction();
+        realm.close();
+
+    }
+    //Method to create a new realm goal from an alarm object
+    public void createNewRealmAlarm(Alarm alarm) {
+        Realm realm = Realm.getInstance(mAppContext);
+        realm.beginTransaction();
+        RealmAlarm ra = realm.createObject(RealmAlarm.class);
+        ra.setWeekday(alarm.getWeekday());
+        ra.setActivated(alarm.getActivated());
+        ra.setHour(alarm.getHour());
+        ra.setMinutes(alarm.getMinutes());
+        ra.setName(alarm.getName());
+        realm.commitTransaction();
+        realm.close();
+    }
+
+    public ArrayList<Alarm> getAlarms() {
+
+        RealmAlarm alarm;
+        Realm realm = Realm.getInstance(mAppContext);
+        RealmQuery<RealmAlarm> query = realm.where(RealmAlarm.class);
+        RealmResults<RealmAlarm> result = query.findAll();
+        Log.d("recycler", "realm list size: " + Integer.toString(result.size()));
+        ArrayList<Alarm> alarmList = new ArrayList<Alarm>();
+
+        if (result.size() > 0 ) {
+
+            for (RealmAlarm ra : result) {
+                Alarm a = new Alarm(ra.getWeekday(), ra.getActivated(), ra.getHour(), ra.getMinutes(), ra.getName());
+                alarmList.add(a);
+            }
+            realm.close();
+            return alarmList;
+        } else {
+            Log.d("recycler", "getAlarms: null");
+            realm.close();
+            return null;
+        }
 
     }
 
@@ -94,11 +139,14 @@ public class WeighInLab {
 
         if (result1.size() > 0) {
             goal = result1.get(result1.size() - 1);
+            realm.close();
             return new Goal(goal.getGoalweight(), goal.getGoaldate(), goal.isLoose());
         } else {
+            realm.close();
             return null;
         }
     }
+
 
     //Get the last index of weighins to add a unique id to a weighin
     private int getLastIndexOfWeighins(Context context) {
@@ -108,7 +156,7 @@ public class WeighInLab {
         RealmResults<RealmWeighIn> result1 = query.findAll();
 
         int length = result1.size();
-
+        realm.close();
         return length;
     }
 

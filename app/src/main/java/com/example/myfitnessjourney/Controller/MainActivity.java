@@ -1,5 +1,8 @@
 package com.example.myfitnessjourney.Controller;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.Calendar;
+
+import Model.Alarm;
+import Services.WeighInLab;
+import io.realm.Realm;
 
 /**
  * Created by fredrikstahl on 15-08-04.
@@ -34,13 +43,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_main_activity);
+        Realm.deleteRealmFile(this);
+
+        Alarm alarm = new Alarm(4, true, 21, 33, "Monday");
+        WeighInLab.get(this).createNewRealmAlarm(alarm);
+        /*
+        Alarm savedAlarm = WeighInLab.get(this).getAlarm();
+        if (savedAlarm != null) {
+            scheduleNextAlarm(savedAlarm);
+            Log.d("recycler", "YES ALARM EXISTS!");
+        }
+        */
+
+
         //Realm.deleteRealmFile(this);
         mFragmentManager = getSupportFragmentManager();
         initializeNavigation();
 
             Bundle bundleNew = new Bundle();
             bundleNew.putBoolean("isBackPressed", false);
-            customNavigationCall(R.id.home, bundleNew);
+            customNavigationCall(2, bundleNew);
             Log.d("log_1", "isntSavedInstance");
 
 
@@ -71,6 +93,15 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
 
+            case R.id.action_add_alarm:
+                Log.d("new_alarm", "entered case");
+                abdToggle.setDrawerIndicatorEnabled(false);
+                NewAlarmFragment naf = new NewAlarmFragment();
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.frame, naf)
+                        .commit();
+                break;
+
             case R.id.home:
                 if (bundle == null) {
                     onBackPressed();
@@ -87,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
             case R.layout.weighin_detail:
                 abdToggle.setDrawerIndicatorEnabled(false);
                 WeighInDetailFragment wdf = (WeighInDetailFragment) mFragmentManager.findFragmentByTag("FRAGMENT_1B");
-
                 if (wdf == null) {
                     wdf = new WeighInDetailFragment();
                     wdf.setArguments(bundle);
@@ -115,10 +145,17 @@ public class MainActivity extends AppCompatActivity {
                 mFragmentManager.beginTransaction()
                         .replace(R.id.frame, gff, "goal_fragment")
                         .commit();
+                break;
+
+            case 2:
+                WeighInCardView wicv = new WeighInCardView();
+                mFragmentManager.beginTransaction()
+                        .add(R.id.frame, wicv)
+                        .commit();
 
         }
     }
-
+/*
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("currentFragment", currentFragment);
@@ -135,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+    */
 
 
     @Override
@@ -266,6 +304,14 @@ public class MainActivity extends AppCompatActivity {
                         mFragmentManager.beginTransaction()
                                 .replace(R.id.frame, gf, "goal_fragment")
                                 .commit();
+                        return true;
+
+                    case R.id.scheduler:
+                        Log.d("recycler", "scheduler");
+                        WeighInScheduleFragment wsf = new WeighInScheduleFragment();
+                        mFragmentManager.beginTransaction()
+                                .replace(R.id.frame, wsf)
+                                .commit();
 
                     default:
                         return true;
@@ -308,9 +354,32 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
+
+    public void scheduleNextAlarm(Alarm alarm) {
+        Calendar calendar = Calendar.getInstance();
+
+        /*
+        calendar.set(Calendar.MONTH, 12);
+        calendar.set(Calendar.YEAR, 2015); //current year
+        calendar.set(Calendar.DAY_OF_MONTH, 20);
+        */
+        //calendar.set(Calendar.DAY_OF_WEEK, 21);
+        calendar.set(Calendar.HOUR_OF_DAY, alarm.getHour());
+        calendar.set(Calendar.MINUTE, alarm.getMinutes());
+        //calendar.set(Calendar.SECOND, 0);
+
+        long interval = calendar.getTimeInMillis();
+        Log.d("schedule", Long.toString(interval));
+
+        Intent mIntent = new Intent(MainActivity.this, AlarmTriggerReceiver.class);
+        PendingIntent mPendingIntent = PendingIntent.getBroadcast(this, 192837, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), 3000, mPendingIntent);
+        Log.d("recycler", calendar.getTime().toString());
+    }
+
 
 
 

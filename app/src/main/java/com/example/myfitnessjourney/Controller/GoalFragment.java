@@ -87,8 +87,10 @@ public class GoalFragment extends Fragment {
             Log.d("log_1", "configDidchange");
             mWeightValue.setText(Float.toString(ENTERED_WEIGHT) + " KG");
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd yyyy");
-            String dateString = sdf.format(SELECTED_DATE);
-            mDateValue.setText(dateString);
+            if (SELECTED_DATE != null) {
+                String dateString = sdf.format(SELECTED_DATE);
+                mDateValue.setText(dateString);
+            }
 
             if (isLoose) {
                 goal_type_toggle.setChecked(false);

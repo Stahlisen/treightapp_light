@@ -16,6 +16,14 @@
             android:icon="@drawable/ic_diploma_light"
             android:title="My Goal" />
 
+        <item
+            android:id="@+id/scheduler"
+            android:checked="false"
+            android:icon="@drawable/ic_action_clock"
+            android:title="WeighIn Scheduler">
+
+        </item>
+
 
     </group>
 </menu><!-- From: file:/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/src/main/res/menu/drawer.xml -->

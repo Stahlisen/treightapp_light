@@ -3,8 +3,6 @@
     <!-- From: file:/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/src/main/res/values-v14/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorPrimary">@color/PrimaryColor</item>
-        <item name="android:colorPrimaryDark">@color/PrimaryDarkColor</item>
         <item name="windowActionBar">false</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>

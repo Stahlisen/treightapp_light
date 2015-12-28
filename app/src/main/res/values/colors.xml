@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <color name="green_1">#4CAF50</color>
+    <color name="green_1">#A5D6A7</color>
     <color name="green_2">#388E3C</color>
     <color name="green_3">#81A818</color>
     <color name="text_white">#FFFFFF</color>
     <color name="text_black">#000000</color>
     <color name="bg_grey">#D9D9D9</color>
-    <color name="PrimaryColor">#388E3C</color>
-    <color name="PrimaryDarkColor">#1B5E20</color>
+    <color name="PrimaryColor">#3F51B5</color>
     <color name="red">#F44336</color>
+
+    <color name="goal_type_color_pink">#E91E63</color>
+    <color name="topSectionTextColor">#212121</color>
+    <color name="secondSectionTextColor">#727272</color>
+    <color name="dividerColor">#B6B6B6</color>
 
     <color name="blue_1">#03A9F4</color>
     <color name="blue_accent">#B3E5FC</color>
     <color name="blue_text">#01579B</color>
+    <color name="primary_dark_material_light">#303F9F</color>
+    <color name="accent_material_light">#00bcd4</color>
 
-    
+
 </resources>

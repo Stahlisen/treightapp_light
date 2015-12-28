@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -28,13 +29,19 @@
         <activity
             android:name="com.example.myfitnessjourney.Controller.MainActivity"
             android:configChanges="orientation|screenSize"
-            android:label="MainActivity" >
+            android:label="Treight" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name="com.example.myfitnessjourney.Controller.AlarmTriggerReceiver" />
+
+        <service
+            android:name="com.example.myfitnessjourney.Controller.AlarmTriggerService"
+            android:enabled="true" />
     </application>
 
 </manifest>

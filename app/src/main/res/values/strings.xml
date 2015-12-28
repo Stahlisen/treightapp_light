@@ -19,21 +19,22 @@
     <string name="picture_label">PICTURE</string>
     <string name="picture_enter_hint">Take a picture or choose from gallery</string>
     <string name="your_photo_hint">Your photo</string>
-    
+
     <string-array name="views">
         <item>Home/My Profile</item>
         <item>My Journey</item>
         <item>Settings</item>
     </string-array>
-    
-    <string name="drawer_open">Open navigation drawer</string>
-<string name="drawer_close">Close navigation drawer</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="weighin_list_fragment_title">My Journey</string>
     <string name="title_activity_weigh_in_detail">WeighInDetailActivity</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    
 
 </resources>
