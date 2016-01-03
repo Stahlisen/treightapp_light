@@ -43,10 +43,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_main_activity);
-        Realm.deleteRealmFile(this);
+        //Realm.deleteRealmFile(this);
 
-        Alarm alarm = new Alarm(4, true, 21, 33, "Monday");
+       /* Alarm alarm = new Alarm(4, true, 21, 33, "Monday");
         WeighInLab.get(this).createNewRealmAlarm(alarm);
+        */
         /*
         Alarm savedAlarm = WeighInLab.get(this).getAlarm();
         if (savedAlarm != null) {

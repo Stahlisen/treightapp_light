@@ -5,4 +5,4 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
-<!-- From: file:/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/src/main/res/menu/menu_weigh_in_detail.xml -->
+<!-- From: file:/C:/Users/BetaStåhl/Desktop/treight_android/treightapp_light/app/src/main/res/menu/menu_weigh_in_detail.xml -->

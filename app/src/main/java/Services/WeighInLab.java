@@ -139,8 +139,8 @@ public class WeighInLab {
 
         if (result1.size() > 0) {
             goal = result1.get(result1.size() - 1);
-            realm.close();
             return new Goal(goal.getGoalweight(), goal.getGoaldate(), goal.isLoose());
+
         } else {
             realm.close();
             return null;

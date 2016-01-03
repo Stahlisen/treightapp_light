@@ -10,7 +10,7 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="230dp">
 
         <TextView
             android:id="@+id/alarm_label"
@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="new alarm"
+                android:singleLine="true"
                 android:textColor="@color/secondSectionTextColor"
                 android:layout_marginLeft="10dp"
                 android:layout_below="@id/alarm_label"
@@ -58,7 +59,7 @@
 
             <TextView
                 android:id="@+id/time_edit"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="00:00"
                 android:layout_below="@id/time_label"
@@ -76,8 +77,21 @@
                 android:text="Mo"
                 android:textColor="@color/topSectionTextColor"
                 android:layout_alignBaseline="@id/time_edit"
-                android:textSize="20dp"
-                android:layout_marginLeft="20dp"/>
+                android:textSize="15dp"
+                android:layout_marginLeft="10dp"
+                android:clickable="true"/>
+
+            <ImageView
+                android:id="@+id/day_mon_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_shape"
+                android:visibility="gone"
+                android:layout_alignLeft="@id/day_mon"
+                android:layout_alignStart="@id/day_mon"
+                android:layout_alignBottom="@id/day_mon"
+                android:layout_toLeftOf="@id/day_tu"
+                android:layout_toStartOf="@id/day_tu" />
 
             <TextView
                 android:id="@+id/day_tu"
@@ -87,8 +101,20 @@
                 android:text="Tu"
                 android:textColor="@color/topSectionTextColor"
                 android:layout_alignBaseline="@id/time_edit"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_marginLeft="12dp"/>
+
+            <ImageView
+                android:id="@+id/day_tu_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_shape"
+                android:layout_alignLeft="@id/day_tu"
+                android:layout_alignStart="@id/day_tu"
+                android:layout_alignBottom="@id/day_tu"
+                android:layout_toLeftOf="@id/day_we"
+                android:layout_toStartOf="@id/day_we"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/day_we"
@@ -98,8 +124,20 @@
                 android:text="We"
                 android:textColor="@color/topSectionTextColor"
                 android:layout_alignBaseline="@id/time_edit"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_marginLeft="12dp"/>
+
+            <ImageView
+                android:id="@+id/day_we_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_shape"
+                android:layout_alignLeft="@id/day_we"
+                android:layout_alignStart="@id/day_we"
+                android:layout_alignBottom="@id/day_we"
+                android:layout_toLeftOf="@id/day_th"
+                android:layout_toStartOf="@id/day_th"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/day_th"
@@ -109,8 +147,20 @@
                 android:text="Th"
                 android:textColor="@color/topSectionTextColor"
                 android:layout_alignBaseline="@id/time_edit"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_marginLeft="12dp"/>
+
+            <ImageView
+                android:id="@+id/day_th_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_shape"
+                android:layout_alignLeft="@id/day_th"
+                android:layout_alignStart="@id/day_th"
+                android:layout_alignBottom="@id/day_th"
+                android:layout_toLeftOf="@id/day_fr"
+                android:layout_toStartOf="@id/day_fr"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/day_fr"
@@ -120,8 +170,20 @@
                 android:text="Fr"
                 android:textColor="@color/topSectionTextColor"
                 android:layout_alignBaseline="@id/time_edit"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_marginLeft="12dp"/>
+
+            <ImageView
+                android:id="@+id/day_fr_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_shape"
+                android:layout_alignLeft="@id/day_fr"
+                android:layout_alignStart="@id/day_fr"
+                android:layout_alignBottom="@id/day_fr"
+                android:layout_toLeftOf="@id/day_sa"
+                android:layout_toStartOf="@id/day_sa"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/day_sa"
@@ -131,8 +193,20 @@
                 android:text="Sa"
                 android:textColor="@color/topSectionTextColor"
                 android:layout_alignBaseline="@id/time_edit"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_marginLeft="12dp"/>
+
+            <ImageView
+                android:id="@+id/day_sa_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_shape"
+                android:layout_alignLeft="@id/day_sa"
+                android:layout_alignStart="@id/day_sa"
+                android:layout_alignBottom="@id/day_sa"
+                android:layout_toLeftOf="@id/day_su"
+                android:layout_toStartOf="@id/day_su"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/day_su"
@@ -142,8 +216,18 @@
                 android:text="Su"
                 android:textColor="@color/topSectionTextColor"
                 android:layout_alignBaseline="@id/time_edit"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_marginLeft="12dp"/>
+
+            <ImageView
+                android:id="@+id/day_su_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circle_shape"
+                android:layout_alignLeft="@id/day_su"
+                android:layout_alignStart="@id/day_su"
+                android:layout_alignBottom="@id/day_su"
+                android:visibility="gone"/>
 
 
 

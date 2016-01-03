@@ -2,81 +2,81 @@
 <items version="2" >
 
     <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/classes-3b06d62f5e753b85ef24d87db8e9dc5a2a576316.jar" />
-    </item>
-    <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/exploded-aar/com.android.support/design/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1821601ddbec5ff125653097812823388700af74">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/classes-498c36739674ddc231a31efbe5372c661cc09232.jar" />
-    </item>
-    <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/libs/realm-0.82.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9a7b39bbbbd122951b33f283a0017530aa931355">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/realm-0.82.0-706bba6ea5e119fc15ab2acce5c4aebeb6651e98.jar" />
-    </item>
-    <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/classes-70243ce1f7a19f6a2aadc2d370e50525cd408111.jar" />
-    </item>
-    <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/libs/bolts-android-1.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-773d4c6f67dcc456cfb83e2e8baa9a02f05adb81.jar" />
-    </item>
-    <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-435157799fa32d0387794c62d3e8345f834d6f74.jar" />
-    </item>
-    <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3abb4b88f5a8a0584a9b01d3170d7165f12f8588">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/classes-671fce5fa353a3a975077156594b96b8de3a067d.jar" />
-    </item>
-    <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/libs/Parse-1.9.4.jar"
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\libs\Parse-1.9.4.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="56c22930b5d4f77015b6a40c7f14103d3e101001">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/Parse-1.9.4-de7e2d0c366a545badf0e1b14b98925ba1511cd3.jar" />
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\Parse-1.9.4-7413b0e599c4ab5ba3c677936d041827883a0fb9.jar" />
     </item>
     <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.3.0/jars/classes.jar"
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\libs\realm-0.82.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/classes-86a62140569f8a266193f2a85a73b101e1e7aa31.jar" />
+        sha1="9a7b39bbbbd122951b33f283a0017530aa931355">
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\realm-0.82.0-9206aba27c65be6591076e6b235fc5a3a35f07b2.jar" />
     </item>
     <item
-        jar="/Users/fredrikstahl/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jar="C:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-d32b39cc5bd854840a5c3a20d9fa04b61a759499.jar" />
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-0cf3d10c35e3a85c12847a4ae04cc53252341eed.jar" />
     </item>
     <item
-        jar="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.1/jars/classes.jar"
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-0233cc05dc2170fd1f283b3f2ec436aff0c0298a.jar" />
+    </item>
+    <item
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\classes-9964b10d09550e0481eae49e1cc948205589b05c.jar" />
+    </item>
+    <item
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3abb4b88f5a8a0584a9b01d3170d7165f12f8588">
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\classes-9be76638ab01f52e6a1f4be0880581026b17ed95.jar" />
+    </item>
+    <item
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\classes-af4f4070af449759e4494e32f13c3b8e4a269a53.jar" />
+    </item>
+    <item
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\exploded-aar\com.android.support\design\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1821601ddbec5ff125653097812823388700af74">
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\classes-dc52bb26f8c8ac29290f02daed89900f9de420d8.jar" />
+    </item>
+    <item
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\libs\bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\bolts-android-1.2.0-36d94679e26c832df26e09090e9a6021f86b330f.jar" />
+    </item>
+    <item
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\classes-1c610fa0e009124aca1adca04a3bbd2121bb0e51.jar" />
+    </item>
+    <item
+        jar="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\22.2.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="e1fa5e1123997a55e3ed65b44892993ff4b58cfe">
-        <dex dex="/Users/fredrikstahl/Desktop/MyFitnessJourney_Light/myfitnessjourney_android/app/build/intermediates/pre-dexed/debug/classes-4b5b836e41ada1c0b9086444fd7ad86a1d6d283d.jar" />
+        <dex dex="C:\Users\BetaStåhl\Desktop\treight_android\treightapp_light\app\build\intermediates\pre-dexed\debug\classes-8a00c87db9eb0b40059892724c97978c7dfd7afe.jar" />
     </item>
 
 </items>
