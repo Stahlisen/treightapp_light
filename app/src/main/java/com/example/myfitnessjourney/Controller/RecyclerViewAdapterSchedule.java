@@ -7,6 +7,8 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,7 +40,8 @@ public class RecyclerViewAdapterSchedule extends RecyclerView.Adapter<RecyclerVi
         Alarm alarm = mAlarms.get(position);
         holder.mTextView_alarmName.setText(alarm.getName());
         holder.mTextView_alarmDay.setText(getWeekdayFromInt(alarm.getWeekday()));
-        holder.mTextView_alarmTime.setText("19:30");
+        String minuteString = String.format("%02d", alarm.getMinutes());
+        holder.mTextView_alarmTime.setText(alarm.getHour() + ":" + minuteString);
         holder.mAlarmSwitch.setChecked(alarm.getActivated());
     }
 
@@ -104,6 +107,7 @@ public class RecyclerViewAdapterSchedule extends RecyclerView.Adapter<RecyclerVi
 
         return weekday;
     }
+
 
 
 }

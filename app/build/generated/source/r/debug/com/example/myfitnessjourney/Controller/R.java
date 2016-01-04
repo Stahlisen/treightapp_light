@@ -2217,8 +2217,8 @@ containing a value of this type.
     public static final class id {
         public static final int LinearLayout1=0x7f0e0075;
         public static final int action0=0x7f0e00b0;
-        public static final int action_add=0x7f0e00e3;
-        public static final int action_add_alarm=0x7f0e00e4;
+        public static final int action_add=0x7f0e00e4;
+        public static final int action_add_alarm=0x7f0e00e5;
         public static final int action_bar=0x7f0e0058;
         public static final int action_bar_activity_content=0x7f0e0000;
         public static final int action_bar_container=0x7f0e0057;
@@ -2233,7 +2233,8 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0e0055;
         public static final int action_mode_bar_stub=0x7f0e0054;
         public static final int action_mode_close_button=0x7f0e003d;
-        public static final int action_save_weighin=0x7f0e00e2;
+        public static final int action_save_alarm=0x7f0e00e2;
+        public static final int action_save_weighin=0x7f0e00e3;
         public static final int action_settings=0x7f0e00e1;
         public static final int activity_chooser_view_content=0x7f0e003e;
         public static final int alarmDay=0x7f0e007d;
@@ -2532,9 +2533,10 @@ containing a value of this type.
         public static final int home=0x7f0f0001;
         public static final int login=0x7f0f0002;
         public static final int menu_weigh_in_detail=0x7f0f0003;
-        public static final int new_weighin=0x7f0f0004;
-        public static final int progress=0x7f0f0005;
-        public static final int weighin_scheduler=0x7f0f0006;
+        public static final int new_alarm=0x7f0f0004;
+        public static final int new_weighin=0x7f0f0005;
+        public static final int progress=0x7f0f0006;
+        public static final int weighin_scheduler=0x7f0f0007;
     }
     public static final class mipmap {
         public static final int picture_button=0x7f030000;

@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 NewAlarmFragment naf = new NewAlarmFragment();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.frame, naf)
+                        .addToBackStack("new_alarm")
                         .commit();
                 break;
 
@@ -114,6 +115,18 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.frame, fragment)
                         .commit();
 
+                break;
+
+            case R.id.scheduler:
+                onBackPressed();
+                WeighInScheduleFragment wsf = (WeighInScheduleFragment) mFragmentManager.findFragmentByTag("schedule_fragment");
+                if (wsf == null) {
+                    wsf = new WeighInScheduleFragment();
+                }
+
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.frame, wsf, "schedule_fragment")
+                        .commit();
                 break;
 
             case R.layout.weighin_detail:
@@ -311,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("recycler", "scheduler");
                         WeighInScheduleFragment wsf = new WeighInScheduleFragment();
                         mFragmentManager.beginTransaction()
-                                .replace(R.id.frame, wsf)
+                                .replace(R.id.frame, wsf, "schedule_fragment")
                                 .commit();
 
                     default:

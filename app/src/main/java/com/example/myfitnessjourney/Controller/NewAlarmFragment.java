@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationSet;
@@ -19,13 +22,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import Model.Alarm;
+import Services.WeighInLab;
 
 /**
  * Created by fredrikstahl on 15-12-25.
  */
-public class NewAlarmFragment extends Fragment  {
+public class NewAlarmFragment extends Fragment {
     private EditText mAlarmName;
     private TextView mAlarmTime;
     private TextView mMonday;
@@ -43,6 +51,7 @@ public class NewAlarmFragment extends Fragment  {
     private ImageView mSaturdaySelected;
     private ImageView mSundaySelected;
     private Map<Integer, Boolean> animationMap;
+    int hourSelected, minuteSelected;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,27 +83,27 @@ public class NewAlarmFragment extends Fragment  {
 
     }
 
-    private void populateViewForOrientation (LayoutInflater inflater, ViewGroup viewGroup) {
+    private void populateViewForOrientation(LayoutInflater inflater, ViewGroup viewGroup) {
         viewGroup.removeAllViewsInLayout();
         View view = inflater.inflate(R.layout.new_alarm_fragment, viewGroup);
 
         //Initialize all view elements
-        mAlarmName = (EditText)view.findViewById(R.id.alarm_edit_name);
-        mAlarmTime = (TextView)view.findViewById(R.id.time_edit);
-        mMonday = (TextView)view.findViewById(R.id.day_mon);
-        mMondaySelected = (ImageView)view.findViewById(R.id.day_mon_selected);
-        mTuesday = (TextView)view.findViewById(R.id.day_tu);
-        mTuesdaySelected = (ImageView)view.findViewById(R.id.day_tu_selected);
-        mWednesday = (TextView)view.findViewById(R.id.day_we);
-        mWednesdaySelected = (ImageView)view.findViewById(R.id.day_we_selected);
-        mThursday = (TextView)view.findViewById(R.id.day_th);
-        mThursdaySelected = (ImageView)view.findViewById(R.id.day_th_selected);
-        mFriday = (TextView)view.findViewById(R.id.day_fr);
-        mFridaySelected = (ImageView)view.findViewById(R.id.day_fr_selected);
-        mSaturday = (TextView)view.findViewById(R.id.day_sa);
-        mSaturdaySelected = (ImageView)view.findViewById(R.id.day_sa_selected);
-        mSunday = (TextView)view.findViewById(R.id.day_su);
-        mSundaySelected = (ImageView)view.findViewById(R.id.day_su_selected);
+        mAlarmName = (EditText) view.findViewById(R.id.alarm_edit_name);
+        mAlarmTime = (TextView) view.findViewById(R.id.time_edit);
+        mMonday = (TextView) view.findViewById(R.id.day_mon);
+        mMondaySelected = (ImageView) view.findViewById(R.id.day_mon_selected);
+        mTuesday = (TextView) view.findViewById(R.id.day_tu);
+        mTuesdaySelected = (ImageView) view.findViewById(R.id.day_tu_selected);
+        mWednesday = (TextView) view.findViewById(R.id.day_we);
+        mWednesdaySelected = (ImageView) view.findViewById(R.id.day_we_selected);
+        mThursday = (TextView) view.findViewById(R.id.day_th);
+        mThursdaySelected = (ImageView) view.findViewById(R.id.day_th_selected);
+        mFriday = (TextView) view.findViewById(R.id.day_fr);
+        mFridaySelected = (ImageView) view.findViewById(R.id.day_fr_selected);
+        mSaturday = (TextView) view.findViewById(R.id.day_sa);
+        mSaturdaySelected = (ImageView) view.findViewById(R.id.day_sa_selected);
+        mSunday = (TextView) view.findViewById(R.id.day_su);
+        mSundaySelected = (ImageView) view.findViewById(R.id.day_su_selected);
 
         mAlarmTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,8 +173,10 @@ public class NewAlarmFragment extends Fragment  {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay,
                               int minute) {
-            String minuteString = String.format("%1$02d", Integer.toString(minute));
+            String minuteString = String.format("%02d", minute);
             mAlarmTime.setText(hourOfDay + ":" + minuteString);
+            hourSelected = hourOfDay;
+            minuteSelected = minute;
 
         }
     };
@@ -183,7 +194,7 @@ public class NewAlarmFragment extends Fragment  {
             ObjectAnimator size = ObjectAnimator.ofFloat(selectedDay, "textSize", 15.0f, 20.0f);
 
             AnimatorSet aSet = new AnimatorSet();
-            aSet.playTogether(fade, move,size);
+            aSet.playTogether(fade, move, size);
             aSet.setDuration(200);
             aSet.start();
             animationMap.put(selectedDay.getId(), true);
@@ -248,4 +259,78 @@ public class NewAlarmFragment extends Fragment  {
         }
         return iv;
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.new_alarm, menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save_alarm:
+                saveAlarm();
+                ((MainActivity) getActivity()).customNavigationCall(R.id.scheduler, null);
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void saveAlarm() {
+        Log.d("alarm_weekdays", Integer.toString(hourSelected));
+        Log.d("alarm_weekdays", Integer.toString(minuteSelected));
+        boolean activated =  true;
+        String name = mAlarmName.getText().toString();
+        List<Alarm> alarms = new ArrayList<Alarm>();
+        for (Map.Entry<Integer, Boolean> entry : animationMap.entrySet()) {
+            int weekday;
+
+            if (entry.getValue()) {
+                weekday = getDayOfWeekFromId(entry.getKey());
+                Log.d("alarm_weekdays", Integer.toString(weekday));
+
+                Alarm alarm = new Alarm(weekday, true, hourSelected, minuteSelected, name);
+                alarms.add(alarm);
+            }
+        }
+
+        for (Alarm alarm : alarms) {
+            WeighInLab.get(getActivity()).createNewRealmAlarm(alarm);
+        }
+
+    }
+
+    public int getDayOfWeekFromId(int id) {
+            int dayofWeek = 0;
+        switch (id) {
+            case R.id.day_mon:
+                dayofWeek = 1;
+                break;
+            case R.id.day_tu:
+                dayofWeek = 2;
+                break;
+            case R.id.day_we:
+                dayofWeek = 3;
+                break;
+            case R.id.day_th:
+                dayofWeek = 4;
+                break;
+            case R.id.day_fr:
+                dayofWeek = 5;
+                break;
+            case R.id.day_sa:
+                dayofWeek = 6;
+                break;
+            case R.id.day_su:
+                dayofWeek = 7;
+                break;
+        }
+        return dayofWeek;
+    }
+
+
 }
+

@@ -574,8 +574,8 @@ int drawable trending_up_icon 0x7f020052
 int drawable view_details_button 0x7f020053
 int id LinearLayout1 0x7f0e0075
 int id action0 0x7f0e00b0
-int id action_add 0x7f0e00e3
-int id action_add_alarm 0x7f0e00e4
+int id action_add 0x7f0e00e4
+int id action_add_alarm 0x7f0e00e5
 int id action_bar 0x7f0e0058
 int id action_bar_activity_content 0x7f0e0000
 int id action_bar_container 0x7f0e0057
@@ -590,7 +590,8 @@ int id action_menu_presenter 0x7f0e0003
 int id action_mode_bar 0x7f0e0055
 int id action_mode_bar_stub 0x7f0e0054
 int id action_mode_close_button 0x7f0e003d
-int id action_save_weighin 0x7f0e00e2
+int id action_save_alarm 0x7f0e00e2
+int id action_save_weighin 0x7f0e00e3
 int id action_settings 0x7f0e00e1
 int id activity_chooser_view_content 0x7f0e003e
 int id alarmDay 0x7f0e007d
@@ -883,9 +884,10 @@ int menu drawer 0x7f0f0000
 int menu home 0x7f0f0001
 int menu login 0x7f0f0002
 int menu menu_weigh_in_detail 0x7f0f0003
-int menu new_weighin 0x7f0f0004
-int menu progress 0x7f0f0005
-int menu weighin_scheduler 0x7f0f0006
+int menu new_alarm 0x7f0f0004
+int menu new_weighin 0x7f0f0005
+int menu progress 0x7f0f0006
+int menu weighin_scheduler 0x7f0f0007
 int mipmap picture_button 0x7f030000
 int string abc_action_bar_home_description 0x7f070000
 int string abc_action_bar_home_description_format 0x7f07000d
