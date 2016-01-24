@@ -46,7 +46,7 @@ public class WeighInScheduleFragment extends Fragment {
         recList.setLayoutManager(llm);
         WeighInLab.get(getActivity()).getAllWeighIns(getActivity());
         List<Alarm> alarmList = WeighInLab.get(getActivity()).getAlarms();
-        Log.d("recycler", "size:" + Integer.toString(alarmList.size()));
+        //Log.d("recycler", "size:" + Integer.toString(alarmList.size()));
         RecyclerViewAdapterSchedule rvas = new RecyclerViewAdapterSchedule(alarmList, getActivity());
         recList.setAdapter(rvas);
 

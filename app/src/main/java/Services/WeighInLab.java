@@ -172,6 +172,69 @@ public class WeighInLab {
         return weighinwithId;
     }
 
+    public int calculateProgressTowardsGoal(Float thisWeight) {
+
+        WeighIn firstWeighin = getWeighInWithId(1);
+        float firstWeight = firstWeighin.getWeight();
+        float goalweight = getGoal().getWeight();
+        float diffBetweenFirstAndGoal = firstWeight - goalweight;
+        float diffBetweenFirstAndThis = firstWeight - thisWeight;
+        float percentageProgress = diffBetweenFirstAndThis/diffBetweenFirstAndGoal;
+        String log_percentage = Float.toString(percentageProgress*100);
+        Log.d("recycler", log_percentage + "percentage");
+        double doubleToCeil = percentageProgress*100;
+        int progress = (int) Math.ceil(doubleToCeil);
+
+        return progress;
+    }
+
+    public String getMonthFromInt(int month) {
+        String monthName = "";
+
+        switch (month) {
+
+            case 1:
+                monthName = "January";
+                break;
+            case 2:
+                monthName = "February";
+                break;
+            case 3:
+                monthName = "March";
+                break;
+            case 4:
+                monthName = "April";
+                break;
+            case 5:
+                monthName = "May";
+                break;
+            case 6:
+                monthName = "June";
+                break;
+            case 7:
+                monthName = "July";
+                break;
+            case 8:
+                monthName = "August";
+                break;
+            case 9:
+                monthName = "September";
+                break;
+            case 10:
+                monthName = "October";
+                break;
+            case 11:
+                monthName = "November";
+                break;
+            case 12:
+                monthName = "December";
+                break;
+
+        }
+    return monthName;
+
+    }
+
     public ArrayList<WeighIn> getWeighins() {
         return mWeighins;
     }

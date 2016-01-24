@@ -1,52 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground">
 
-    <TextView
-        android:id="@+id/detail_id"
+    <RelativeLayout
+        android:id="@+id/statisticsContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:textStyle="bold"
+        android:background="@drawable/layer_card_shadow_background">
 
-        />
-    <TextView
-        android:id="@+id/photo_caption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:text="YOUR PHOTO:"
 
-        />
+        <TextView
+            android:id="@+id/date_of_weighin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="26 of June"
+            android:textSize="18dp"
+            android:textColor="@color/text_white"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:textStyle="normal"
+            android:layout_above="@+id/gained"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <at.grabner.circleprogress.CircleProgressView
+            android:id="@+id/circleView"
+            android:layout_width="100dp"
+            android:layout_height="277dp"
+            CircleProgressView:cpv_value="0"
+            CircleProgressView:cpv_maxValue="100"
+            CircleProgressView:cpv_barColor="@color/text_white"
+            CircleProgressView:cpv_rimColor="@color/primary_dark_material_light"
+            CircleProgressView:cpv_textColor="@color/text_white"
+            CircleProgressView:cpv_unitColor="@color/text_white"
+            CircleProgressView:cpv_spinColor="@color/primary_dark_material_light"
+            CircleProgressView:cpv_contourColor="@color/text_white"
+            CircleProgressView:cpv_barWidth="15dp"
+            CircleProgressView:cpv_rimWidth="15dp"
+            CircleProgressView:cpv_contourSize="0dp"
+            CircleProgressView:cpv_autoTextSize="true"
+            CircleProgressView:cpv_seekMode="false"
+            CircleProgressView:cpv_unit="%"
+            CircleProgressView:cpv_unitPosition="right_top"
+            CircleProgressView:cpv_unitScale="1"
+            CircleProgressView:cpv_textScale="1"
+            CircleProgressView:cpv_showUnit="true"
+            android:layout_marginRight="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="of"
+            android:textSize="18dp"
+            android:textColor="@color/text_white"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/gained"
+            android:layout_toEndOf="@+id/gained" />
+
+        <TextView
+            android:id="@+id/weighin_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80.5 lbs"
+            android:textStyle="bold"
+            android:textSize="32dp"
+            android:textColor="@color/text_white"
+
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/date_of_weighin"
+            android:layout_alignStart="@+id/date_of_weighin" />
+
+        <TextView
+            android:id="@+id/gained"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="goal achieved"
+            android:textSize="18dp"
+            android:textColor="@color/text_white"
+            android:layout_below="@+id/circleView"
+            android:layout_alignLeft="@+id/circleView"
+            android:layout_alignStart="@+id/circleView"
+            android:layout_marginBottom="10dp"/>
+
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/detail_image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp" />
-
-    <TextView
-        android:id="@+id/detail_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="@color/green_2"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:id="@+id/detail_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2 DAYS AGO"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"/>
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/weighin_image2"
+        android:scaleType="fitXY"/>
 </LinearLayout>

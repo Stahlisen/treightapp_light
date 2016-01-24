@@ -35,6 +35,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test">testActivity</string>
+    <string name="title_activity_journey_tab">JourneyTabActivity</string>
+
+    <!-- Toolbar titles -->
+    <string name="title_journey">Your journey</string>
+    <string name="title_goal">Your goal</string>
+    <string name="title_alarm">Your weighin schedule</string>
+    <string name="title_newWeighin">New weighin</string>
+    <string name="title_newAlarm">New weighin reminder</string>
+
+
 
 
 </resources>

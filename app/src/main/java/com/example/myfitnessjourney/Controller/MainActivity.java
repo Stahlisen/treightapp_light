@@ -3,6 +3,7 @@ package com.example.myfitnessjourney.Controller;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -16,11 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 import Model.Alarm;
 import Services.WeighInLab;
-import io.realm.Realm;
 
 /**
  * Created by fredrikstahl on 15-08-04.
@@ -28,6 +30,7 @@ import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
+    private TextView toolbar_title;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle abdToggle;
@@ -45,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.test_main_activity);
         //Realm.deleteRealmFile(this);
 
-       /* Alarm alarm = new Alarm(4, true, 21, 33, "Monday");
+        Alarm alarm = new Alarm(4, true, 21, 33, "Monday");
         WeighInLab.get(this).createNewRealmAlarm(alarm);
-        */
+
         /*
         Alarm savedAlarm = WeighInLab.get(this).getAlarm();
         if (savedAlarm != null) {
@@ -90,18 +93,15 @@ public class MainActivity extends AppCompatActivity {
                             .commit();
                 }
                 currentFragment = FRAGMENT_1A;
+                changeTitle(R.string.title_newWeighin);
 
 
                 break;
 
             case R.id.action_add_alarm:
-                Log.d("new_alarm", "entered case");
-                abdToggle.setDrawerIndicatorEnabled(false);
-                NewAlarmFragment naf = new NewAlarmFragment();
-                mFragmentManager.beginTransaction()
-                        .replace(R.id.frame, naf)
-                        .addToBackStack("new_alarm")
-                        .commit();
+                Intent intent = new Intent(this, JourneyTabActivity.class);
+                startActivity(intent);
+                changeTitle(R.string.title_newAlarm);
                 break;
 
             case R.id.home:
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 mFragmentManager.beginTransaction()
                         .replace(R.id.frame, fragment)
                         .commit();
+                changeTitle(R.string.title_journey);
 
                 break;
 
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 mFragmentManager.beginTransaction()
                         .replace(R.id.frame, wsf, "schedule_fragment")
                         .commit();
+                changeTitle(R.string.title_alarm);
                 break;
 
             case R.layout.weighin_detail:
@@ -159,35 +161,18 @@ public class MainActivity extends AppCompatActivity {
                 mFragmentManager.beginTransaction()
                         .replace(R.id.frame, gff, "goal_fragment")
                         .commit();
+                changeTitle(R.string.title_goal);
                 break;
 
             case 2:
-                WeighInCardView wicv = new WeighInCardView();
+                WeighInListFragment wlf = new WeighInListFragment();
                 mFragmentManager.beginTransaction()
-                        .add(R.id.frame, wicv)
+                        .add(R.id.frame, wlf)
                         .commit();
+                changeTitle(R.string.title_journey);
 
         }
     }
-/*
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("currentFragment", currentFragment);
-
-        if (currentFragment == FRAGMENT_1A) {
-            if (NewWeighInFragment.ENTERED_WEIGHT != 0) {
-                float enteredWeight = NewWeighInFragment.ENTERED_WEIGHT;
-                outState.putFloat("entered_weight", enteredWeight);
-            }
-
-            if (NewWeighInFragment.ENTERED_PHOTO != null) {
-                outState.putParcelable("entered_photo", NewWeighInFragment.ENTERED_PHOTO);
-            }
-
-        }
-    }
-    */
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -217,71 +202,26 @@ public class MainActivity extends AppCompatActivity {
         // Catches back action and pops from backstack
         if (mFragmentManager.getBackStackEntryCount() > 0) {
             mFragmentManager.popBackStack();
+            changeTitle(R.string.title_journey);
             currentFragment = FRAGMENT_1;
         } else {
             super.onBackPressed();
         }
     }
-    /*
-    //Restore the fragment which was presented on orientation change
-    public void restoreFragmentFromSavedState(Bundle savedInstanceState) {
-
-        currentFragment = savedInstanceState.getInt("currentFragment");
-
-        int tempId = 0;
-        if (currentFragment == 0) {
-            tempId = R.id.home;
-        } else if (currentFragment == 1) {
-            tempId = R.id.action_add;
-
-            if (savedInstanceState.getFloat("entered_weight") != 0 || savedInstanceState.getParcelable("entered_photo") != null) {
-                Bundle restoreBundle = new Bundle();
-
-                if (savedInstanceState.getFloat("entered_weight") != 0) {
-                    Float entered_weight = savedInstanceState.getFloat("entered_weight");
-                    restoreBundle.putFloat("entered_weight", entered_weight);
-                }
-
-                if (savedInstanceState.getParcelable("entered_photo") != null) {
-                    Bitmap bmp = savedInstanceState.getParcelable("entered_photo");
-                    restoreBundle.putParcelable("entered_photo", bmp);
-                }
-
-                customNavigationCall(tempId, restoreBundle);
-
-            } else {
-                customNavigationCall(tempId, null);
-            }
-
-        } else if (currentFragment == 2) {
-            tempId = R.layout.weighin_detail;
-            customNavigationCall(tempId, null);
-
-        } else if (currentFragment == 3) {
-            tempId = R.id.my_goal;
-            customNavigationCall(tempId, savedInstanceState);
-        }
-        if (tempId == R.layout.weighin_detail) {
-            Bundle bundleWithSelectedId = new Bundle();
-            bundleWithSelectedId.putInt("weighin_id", SELECTED_WEIGHIN);
-            customNavigationCall(tempId, bundleWithSelectedId);
-        } else {
-            if (tempId == R.id.home) {
-                Bundle bundleNew = new Bundle();
-                bundleNew.putBoolean("isBackPressed", false);
-                customNavigationCall(R.id.home, bundleNew);
-            } else {
-                customNavigationCall(tempId, null);
-            }
-
-        }
-    }
-    */
 
     public void initializeNavigation() {
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar_title = (TextView) findViewById(R.id.toolbar_title);
         setSupportActionBar(toolbar);
+        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Chunkfive.otf");
+        toolbar_title.setTypeface(tf);
+        toolbar_title.setText("treight app");
+
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //getSupportActionBar().setIcon(R.drawable.treight_white);
+
 
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -310,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
                         android.support.v4.app.FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.frame, fragment);
                         fragmentTransaction.commit();
+                        changeTitle(R.string.title_journey);
                         return true;
 
                     case R.id.my_goal:
@@ -318,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
                         mFragmentManager.beginTransaction()
                                 .replace(R.id.frame, gf, "goal_fragment")
                                 .commit();
+                        changeTitle(R.string.title_goal);
                         return true;
 
                     case R.id.scheduler:
@@ -326,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
                         mFragmentManager.beginTransaction()
                                 .replace(R.id.frame, wsf, "schedule_fragment")
                                 .commit();
+                        changeTitle(R.string.title_alarm);
 
                     default:
                         return true;
@@ -392,6 +335,15 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), 3000, mPendingIntent);
         Log.d("recycler", calendar.getTime().toString());
+    }
+
+    public void changeTitle(int stringResource) {
+        toolbar_title.setText(stringResource);
+
+    }
+
+    public TextView getToolbar_title() {
+        return toolbar_title;
     }
 
 
