@@ -33,7 +33,7 @@
             android:layout_height="277dp"
             CircleProgressView:cpv_value="0"
             CircleProgressView:cpv_maxValue="100"
-            CircleProgressView:cpv_barColor="@color/text_white"
+            CircleProgressView:cpv_barColor="@color/accent_material_light"
             CircleProgressView:cpv_rimColor="@color/primary_dark_material_light"
             CircleProgressView:cpv_textColor="@color/text_white"
             CircleProgressView:cpv_unitColor="@color/text_white"
@@ -93,10 +93,18 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/detail_image"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/weighin_image2"
-        android:scaleType="fitXY"/>
+        android:layout_margin="20dp">
+
+        <ImageView
+            android:id="@+id/detail_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/weighin_image2"
+            android:scaleType="fitXY"
+            android:background="@drawable/layer_card_shadow_background"/>
+
+    </FrameLayout>
 </LinearLayout>

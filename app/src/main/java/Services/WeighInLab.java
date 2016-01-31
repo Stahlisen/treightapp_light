@@ -176,7 +176,7 @@ public class WeighInLab {
 
         WeighIn firstWeighin = getWeighInWithId(1);
         float firstWeight = firstWeighin.getWeight();
-        float goalweight = getGoal().getWeight();
+         float goalweight = getGoal().getWeight();
         float diffBetweenFirstAndGoal = firstWeight - goalweight;
         float diffBetweenFirstAndThis = firstWeight - thisWeight;
         float percentageProgress = diffBetweenFirstAndThis/diffBetweenFirstAndGoal;

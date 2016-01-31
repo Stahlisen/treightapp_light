@@ -127,9 +127,6 @@ public class NewWeighInFragment extends Fragment {
         mChooseWeight = (ImageButton) view.findViewById(R.id.weight_edit_button);
         mTakePicture = (ImageButton) view.findViewById(R.id.take_picture_button);
         mBrowsePicture = (ImageButton) view.findViewById(R.id.browse_gallery_image_button);
-
-        //Se kommentar på metoden pickPhoto()
-        mBrowsePicture.setEnabled(false);
         mPhotoView = (ImageView) view.findViewById(R.id.photo_view);
 
         //Create listeners
@@ -223,8 +220,12 @@ public class NewWeighInFragment extends Fragment {
             if (requestCode ==  IMAGE_PICK_REQUEST) {
                 Uri selectedImageUri = data.getData();
                 imgPath = getPath(selectedImageUri);
-                Bitmap bp = (Bitmap) data.getExtras().get("data");
-                mPhotoView.setImageBitmap(bp);
+                if (data.getExtras().get("data")!= null) {
+
+                    Bitmap bp = (Bitmap) data.getExtras().get("data");
+                    mPhotoView.setImageBitmap(bp);
+                }
+
 
             }
         }

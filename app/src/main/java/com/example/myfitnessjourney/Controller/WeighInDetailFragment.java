@@ -101,8 +101,8 @@ public class WeighInDetailFragment extends Fragment {
     //Initiate circle progress view based on weighin stats
     private void initiateProgressCircle() {
 
-        mCircleView.setEnabled(true);
-        mCircleView.setText("Loading...");
+        mCircleView.setShowTextWhileSpinning(true);
+        mCircleView.setText("Calculating...");
 
         mCircleView.setOnAnimationStateChangedListener(
                 new AnimationStateChangedListener() {
@@ -140,13 +140,13 @@ public class WeighInDetailFragment extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mCircleView.setValue(progresspercentage);
+                    mCircleView.setValue(0);
                     mCircleView.spin();
                 }
             });
 
             try {
-                Thread.sleep(200);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -158,7 +158,7 @@ public class WeighInDetailFragment extends Fragment {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                mCircleView.setValueAnimated(progresspercentage);
+                mCircleView.setValueAnimated(42);
             }
         }
 
