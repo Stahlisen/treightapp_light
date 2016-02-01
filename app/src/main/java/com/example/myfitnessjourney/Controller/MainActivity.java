@@ -99,9 +99,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_add_alarm:
-                Intent intent = new Intent(this, JourneyTabActivity.class);
-                startActivity(intent);
                 changeTitle(R.string.title_newAlarm);
+                abdToggle.setDrawerIndicatorEnabled(false);
+                NewAlarmFragment naf = new NewAlarmFragment();
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.frame, naf, "newAlarm_fragment")
+                        .addToBackStack("newAlarm_Fragment")
+                        .commit();
                 break;
 
             case R.id.home:
@@ -114,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 mFragmentManager.beginTransaction()
                         .replace(R.id.frame, fragment)
                         .commit();
-                changeTitle(R.string.title_journey);
+                changeTitle(R.string.title_weighins);
 
                 break;
 
@@ -169,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 mFragmentManager.beginTransaction()
                         .add(R.id.frame, wlf)
                         .commit();
-                changeTitle(R.string.title_journey);
+                changeTitle(R.string.title_weighins);
 
         }
     }
@@ -202,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         // Catches back action and pops from backstack
         if (mFragmentManager.getBackStackEntryCount() > 0) {
             mFragmentManager.popBackStack();
-            changeTitle(R.string.title_journey);
+            changeTitle(R.string.title_weighins);
             currentFragment = FRAGMENT_1;
         } else {
             super.onBackPressed();
@@ -250,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                         android.support.v4.app.FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.frame, fragment);
                         fragmentTransaction.commit();
-                        changeTitle(R.string.title_journey);
+                        changeTitle(R.string.title_weighins);
                         return true;
 
                     case R.id.my_goal:

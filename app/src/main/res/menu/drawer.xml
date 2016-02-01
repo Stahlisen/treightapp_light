@@ -7,20 +7,20 @@
             android:id="@+id/progress"
             android:checked="false"
             android:icon="@drawable/ic_bullish_100"
-            android:title="My Journey"/>
+            android:title="Your weighins"/>
 
 
         <item
             android:id="@+id/my_goal"
             android:checked="false"
             android:icon="@drawable/ic_diploma_light"
-            android:title="My Goal" />
+            android:title="Your goal" />
 
         <item
             android:id="@+id/scheduler"
             android:checked="false"
             android:icon="@drawable/ic_action_clock"
-            android:title="WeighIn Scheduler">
+            android:title="Your weighin schedule">
 
         </item>
 

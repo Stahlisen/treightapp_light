@@ -61,38 +61,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.mTextView_topTitle.setText("WEIGHIN #" + posWeighin.getId());
 
-        if(statisticsAvailable()) {
-            float firstWeighin = listOfWeighIns.get(0).getWeight();
-            holder.mTextView_startWeight.setText(Float.toString(firstWeighin) + " KG");
-            float goalweight = WeighInLab.get(mContext).getGoal().getWeight();
-            holder.mTextView_goalWeight.setText(Float.toString(goalweight) + " KG");
-            float diffBetweenFirstAndGoal = firstWeighin - goalweight;
-            float diffBetweenFirstAndThis = firstWeighin - posWeighin.getWeight();
-            float percentageProgress = diffBetweenFirstAndThis/diffBetweenFirstAndGoal;
-            String log_percentage = Float.toString(percentageProgress*100);
-            Log.d("recycler", log_percentage + "percentage");
-            double doubleToCeil = percentageProgress*100;
-            int progress = (int) Math.ceil(doubleToCeil);
-            String progressPrecentage_string;
-            if (progress < 0) {
-                progressPrecentage_string = "0";
-            } else {
-                progressPrecentage_string = Integer.toString(progress);
-            }
-
-            holder.mSeekBar.setProgress(progress);
-            holder.mTextView_percentageText.setText(progressPrecentage_string + "% OF GOAL ACHIEVED");
-
-            //Ta första vikten - goal weight (92 - 85) = 7
-            //ta 92 - denna vikt : 92-91,5 =
-            // 0,5/7
-        } else {
-            holder.mSeekBar.setVisibility(View.GONE);
-            holder.mTextView_percentageText.setVisibility(View.GONE);
-            holder.mTextView_startWeight.setVisibility(View.GONE);
-            holder.mTextView_goalWeight.setVisibility(View.GONE);
-
-        }
 
         setAnimation(holder.mCardView, position);
 
@@ -138,27 +106,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mTextView_topTitle = (TextView) itemView.findViewById(R.id.cardView_topTitle);
             mTextView_secondaryTitle = (TextView) itemView.findViewById(R.id.cardView_secondaryTitle);
             mTextView_subText = (TextView) itemView.findViewById(R.id.cardView_subText);
-            mTextView_startWeight = (TextView) itemView.findViewById(R.id.seekbar_startText);
-            mTextView_goalWeight = (TextView) itemView.findViewById(R.id.seekbar_endText);
-            mTextView_percentageText = (TextView) itemView.findViewById(R.id.cardView_percentageText);
+
+
+
             mImageView = (ImageView) itemView.findViewById(R.id.cardView_image);
-            mSeekBar = (SeekBar) itemView.findViewById(R.id.cardView_seekbar);
 
         }
 
-    }
-
-    //Check if user has a goal and a previous weigh in so we can produce statistics, if not, hide statistics.
-    public boolean statisticsAvailable() {
-
-        /*Retrieve the goal and see if it exists, if doesn't, don't show any statistics and
-        retrieve list of weighins, if it's empty, don't show any statistics
-        */
-        if (WeighInLab.get(mContext).getGoal() != null && WeighInLab.get(mContext).getAllWeighIns(mContext).size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 }

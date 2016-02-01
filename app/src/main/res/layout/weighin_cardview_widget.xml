@@ -67,48 +67,10 @@
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:id="@+id/cardView_seperator"
-            android:background="@android:color/darker_gray"
+            android:background="@color/secondSectionTextColor"
             android:layout_below="@id/cardView_subText"
             android:layout_marginTop="24dp"/>
 
-        <SeekBar
-            android:id="@+id/cardView_seekbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/seekbar_startText"
-            android:layout_marginTop="0dp"
-            android:max="100"
-            android:progress="0">
-        </SeekBar>
-
-        <TextView
-            android:id="@+id/seekbar_startText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cardView_seperator"
-            android:text="90 KG"
-            android:layout_margin="12dp"/>
-
-        <TextView
-            android:id="@+id/seekbar_endText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="85 KG"
-            android:layout_below="@+id/cardView_seperator"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="12dp"
-            android:visibility="visible"/>
-
-        <TextView
-            android:id="@+id/cardView_percentageText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0% OF GOAL ACHIEVED"
-            style="@style/cardView_secondSectionText"
-            android:layout_alignTop="@+id/seekbar_endText"
-            android:layout_centerHorizontal="true"/>
         <TextView
             android:id="@+id/cardView_alternateText"
             android:layout_width="wrap_content"
@@ -125,12 +87,12 @@
             android:layout_height="36dp"
             android:text="SHOW DETAILS"
             android:textColor="@color/topSectionTextColor"
-            android:layout_below="@+id/cardView_seekbar"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_margin="8dp"
             android:padding="8dp"
-            style="?android:attr/borderlessButtonStyle"/>
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_below="@id/cardView_seperator" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

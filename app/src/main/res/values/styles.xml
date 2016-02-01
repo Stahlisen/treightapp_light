@@ -16,22 +16,22 @@
 
     <style name="cardView_topSectionText">
         <item name="android:textColor">@color/topSectionTextColor</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textSize">20dp</item>
 
 
     </style>
 
     <style name="cardView_secondSectionText">
-        <item name="android:textColor">@color/secondSectionTextColor</item>
+        <item name="android:textColor">@color/topSectionTextColor</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">20dp</item>
     </style>
 
     <style name="cardView_thirdSectionText">
         <item name="android:textColor">@color/secondSectionTextColor</item>
-        <item name="android:textStyle"></item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
     </style>
 
     <style name="AppBaseTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

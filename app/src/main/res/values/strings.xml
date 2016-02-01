@@ -39,11 +39,11 @@
     <string name="title_activity_journey_tab">JourneyTabActivity</string>
 
     <!-- Toolbar titles -->
-    <string name="title_journey">your journey</string>
-    <string name="title_goal">your goal</string>
-    <string name="title_alarm">your weighin schedule</string>
-    <string name="title_newWeighin">new weighin</string>
-    <string name="title_newAlarm">new weighin reminder</string>
+    <string name="title_weighins">Your weighins</string>
+    <string name="title_goal">Your goal</string>
+    <string name="title_alarm">Your weighin schedule</string>
+    <string name="title_newWeighin">New weighin</string>
+    <string name="title_newAlarm">Schedule a new weighin</string>
 
 
 
