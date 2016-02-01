@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,6 +33,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import Model.WeighIn;
+import Services.BitMapFactory;
 import Services.WeighInLab;
 
 /**
@@ -220,13 +222,10 @@ public class NewWeighInFragment extends Fragment {
             if (requestCode ==  IMAGE_PICK_REQUEST) {
                 Uri selectedImageUri = data.getData();
                 imgPath = getPath(selectedImageUri);
-                if (data.getExtras().get("data")!= null) {
-
-                    Bitmap bp = (Bitmap) data.getExtras().get("data");
-                    mPhotoView.setImageBitmap(bp);
+                if (selectedImageUri != null) {
+                    BitMapFactory bmf = new BitMapFactory();
+                    mPhotoView.setImageBitmap(bmf.createBitmapFromFilePath(imgPath));
                 }
-
-
             }
         }
 

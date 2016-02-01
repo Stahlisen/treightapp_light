@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<set xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <objectAnimator
-        android:propertyName="textSize"
-        android:valueFrom="20dp"
-        android:valueTo="30dp"
-        />
-</set><!-- From: file:/C:/Users/BetaStåhl/Desktop/treight_android/treightapp_light/app/src/main/res/animator/text_selected.xml -->

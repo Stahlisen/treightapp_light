@@ -1,0 +1,14 @@
+.gradle
+build/*
+/.idea
+*.iml
+local.properties
+.DS_Store 
+app/build/intermediates
+
+# Android Studio / IntelliJ IDEA 
+*.iws
+.idea/libraries
+.idea/tasks.xml
+.idea/vcs.xml
+.idea/workspace.xml
