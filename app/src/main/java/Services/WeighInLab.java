@@ -173,19 +173,22 @@ public class WeighInLab {
     }
 
     public int calculateProgressTowardsGoal(Float thisWeight) {
+        if (getGoal() != null) {
+            WeighIn firstWeighin = getWeighInWithId(1);
+            float firstWeight = firstWeighin.getWeight();
+            float goalweight = getGoal().getWeight();
+            float diffBetweenFirstAndGoal = firstWeight - goalweight;
+            float diffBetweenFirstAndThis = firstWeight - thisWeight;
+            float percentageProgress = diffBetweenFirstAndThis / diffBetweenFirstAndGoal;
+            String log_percentage = Float.toString(percentageProgress * 100);
+            Log.d("recycler", log_percentage + "percentage");
+            double doubleToCeil = percentageProgress * 100;
+            int progress = (int) Math.ceil(doubleToCeil);
 
-        WeighIn firstWeighin = getWeighInWithId(1);
-        float firstWeight = firstWeighin.getWeight();
-         float goalweight = getGoal().getWeight();
-        float diffBetweenFirstAndGoal = firstWeight - goalweight;
-        float diffBetweenFirstAndThis = firstWeight - thisWeight;
-        float percentageProgress = diffBetweenFirstAndThis/diffBetweenFirstAndGoal;
-        String log_percentage = Float.toString(percentageProgress*100);
-        Log.d("recycler", log_percentage + "percentage");
-        double doubleToCeil = percentageProgress*100;
-        int progress = (int) Math.ceil(doubleToCeil);
-
-        return progress;
+            return progress;
+        } else {
+            return 0;
+        }
     }
 
     public String getMonthFromInt(int month) {

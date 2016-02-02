@@ -17,9 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
+import java.util.List;
 
 import Model.Alarm;
 import Services.WeighInLab;
@@ -46,10 +45,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_main_activity);
-        //Realm.deleteRealmFile(this);
 
+        /*
         Alarm alarm = new Alarm(4, true, 21, 33, "Monday");
         WeighInLab.get(this).createNewRealmAlarm(alarm);
+        */
+
 
         /*
         Alarm savedAlarm = WeighInLab.get(this).getAlarm();
@@ -58,9 +59,15 @@ public class MainActivity extends AppCompatActivity {
             Log.d("recycler", "YES ALARM EXISTS!");
         }
         */
-
-
         //Realm.deleteRealmFile(this);
+
+        if (WeighInLab.get(this).getAlarms() != null) {
+            List<Alarm> alarms = WeighInLab.get(this).getAlarms();
+            for (Alarm al : alarms) {
+                scheduleNextAlarm(al);
+            }
+        }
+
         mFragmentManager = getSupportFragmentManager();
         initializeNavigation();
 
@@ -99,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_add_alarm:
+
                 changeTitle(R.string.title_newAlarm);
                 abdToggle.setDrawerIndicatorEnabled(false);
                 NewAlarmFragment naf = new NewAlarmFragment();
@@ -106,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.frame, naf, "newAlarm_fragment")
                         .addToBackStack("newAlarm_Fragment")
                         .commit();
+
                 break;
 
             case R.id.home:
@@ -320,15 +329,9 @@ public class MainActivity extends AppCompatActivity {
     public void scheduleNextAlarm(Alarm alarm) {
         Calendar calendar = Calendar.getInstance();
 
-        /*
-        calendar.set(Calendar.MONTH, 12);
-        calendar.set(Calendar.YEAR, 2015); //current year
-        calendar.set(Calendar.DAY_OF_MONTH, 20);
-        */
-        //calendar.set(Calendar.DAY_OF_WEEK, 21);
+        calendar.set(Calendar.DAY_OF_WEEK, alarm.getWeekday()+1);
         calendar.set(Calendar.HOUR_OF_DAY, alarm.getHour());
         calendar.set(Calendar.MINUTE, alarm.getMinutes());
-        //calendar.set(Calendar.SECOND, 0);
 
         long interval = calendar.getTimeInMillis();
         Log.d("schedule", Long.toString(interval));
@@ -337,8 +340,9 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent mPendingIntent = PendingIntent.getBroadcast(this, 192837, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), 3000, mPendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), alarmManager.INTERVAL_DAY * 7, mPendingIntent);
         Log.d("recycler", calendar.getTime().toString());
+
     }
 
     public void changeTitle(int stringResource) {

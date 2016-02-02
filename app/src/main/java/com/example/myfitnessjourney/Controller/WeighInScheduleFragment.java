@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Alarm;
@@ -24,6 +25,7 @@ import Services.WeighInLab;
  * Created by fredrikstahl on 15-12-09.
  */
 public class WeighInScheduleFragment extends Fragment {
+    List<Alarm> alarmList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,9 +46,14 @@ public class WeighInScheduleFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(applicationContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-        WeighInLab.get(getActivity()).getAllWeighIns(getActivity());
-        List<Alarm> alarmList = WeighInLab.get(getActivity()).getAlarms();
-        //Log.d("recycler", "size:" + Integer.toString(alarmList.size()));
+
+
+        if (WeighInLab.get(getActivity()).getAlarms() != null) {
+             alarmList = WeighInLab.get(getActivity()).getAlarms();
+        } else {
+            alarmList = new ArrayList<Alarm>();
+        }
+
         RecyclerViewAdapterSchedule rvas = new RecyclerViewAdapterSchedule(alarmList, getActivity());
         recList.setAdapter(rvas);
 

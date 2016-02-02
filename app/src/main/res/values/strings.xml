@@ -45,6 +45,11 @@
     <string name="title_newWeighin">New weighin</string>
     <string name="title_newAlarm">Schedule a new weighin</string>
 
+    <string name="message_removeAlarm">Remove this scheduled weighin?</string>
+    <string name="message_unscheduleAlarm">Unschedule this weighin?</string>
+    <string name="message_reschduleAlarm">Reschedule this weighin?</string>
+
+
 
 
 

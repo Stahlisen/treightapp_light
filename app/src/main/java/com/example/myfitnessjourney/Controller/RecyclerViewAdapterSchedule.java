@@ -1,14 +1,14 @@
 package com.example.myfitnessjourney.Controller;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +43,52 @@ public class RecyclerViewAdapterSchedule extends RecyclerView.Adapter<RecyclerVi
         String minuteString = String.format("%02d", alarm.getMinutes());
         holder.mTextView_alarmTime.setText(alarm.getHour() + ":" + minuteString);
         holder.mAlarmSwitch.setChecked(alarm.getActivated());
+
+        holder.mRemoveAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(mContext)
+                        .setMessage(R.string.message_removeAlarm)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                //TODO: Delete alarm from realm
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+
+            }
+        });
+
+        holder.mAlarmSwitch.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+
+                new AlertDialog.Builder(mContext)
+                        .setMessage(R.string.message_reschduleAlarm)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                //TODO: Unschedule/Reschedule alarm
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+
+
+            }
+        });
     }
 
     @Override
