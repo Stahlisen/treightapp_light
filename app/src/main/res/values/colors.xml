@@ -20,6 +20,7 @@
     <color name="blue_text">#01579B</color>
     <color name="primary_dark_material_light">#0097A7</color>
     <color name="accent_material_light">#FFC107</color>
+    <color name="divider_color">#006775</color>
 
 
 </resources>

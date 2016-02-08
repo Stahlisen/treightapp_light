@@ -72,7 +72,8 @@ public class BaseActivity extends AppCompatActivity {
         //Setting the actionbarToggle to drawer layout
         drawerLayout.setDrawerListener(abdToggle);
         abdToggle.setDrawerIndicatorEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
         //Sync toggle
         abdToggle.syncState();

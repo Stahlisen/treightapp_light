@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/PrimaryColor">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:src="@drawable/weighin_image1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/text_white">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_image"
+            android:text="Fredrik Ståhl"
+            android:textColor="@color/text_white"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_name"
+            android:layout_marginTop="25dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/cardView_seperator"
+                android:background="@color/dividerColor"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/current_weight_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current weight"
+                android:textSize="12dp"
+                android:textColor="@color/text_white"
+                android:layout_marginLeft="30dp"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:id="@+id/current_weight_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/current_weight_label"
+                android:text="85 KG"
+                android:textSize="12dp"
+                android:layout_alignRight="@id/current_weight_label"
+                android:layout_alignLeft="@id/current_weight_label"
+                android:textColor="@color/text_white"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/since_start_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/current_weight_label"
+                android:text="Since start"
+                android:textSize="12dp"
+                android:textColor="@color/text_white"
+                android:layout_marginLeft="20dp"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:id="@+id/since_start_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/since_start_label"
+                android:text="-7,2 KG"
+                android:textSize="12dp"
+                android:layout_alignRight="@id/since_start_label"
+                android:layout_alignLeft="@id/since_start_label"
+                android:textColor="@color/text_white"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/goal_weight_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Goal weight"
+                    android:textSize="12dp"
+                    android:textColor="@color/text_white"
+                    android:layout_marginRight="30dp"
+                    android:textStyle="normal"/>
+
+                <TextView
+                    android:id="@+id/goal_weight_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/goal_weight_label"
+                    android:text="82 KG"
+                    android:textSize="12dp"
+                    android:layout_alignRight="@id/goal_weight_label"
+                    android:layout_alignLeft="@id/goal_weight_label"
+                    android:textColor="@color/text_white"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/days_left_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/goal_weight_label"
+                    android:text="Days left"
+                    android:textSize="12dp"
+                    android:textColor="@color/text_white"
+                    android:layout_marginRight="20dp"
+                    android:textStyle="normal"/>
+
+                <TextView
+                    android:id="@+id/days_left_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/days_left_label"
+                    android:text="210"
+                    android:textSize="12dp"
+                    android:layout_alignRight="@id/days_left_label"
+                    android:layout_alignLeft="@id/days_left_label"
+                    android:textColor="@color/text_white"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"/>
+
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/bg_grey"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

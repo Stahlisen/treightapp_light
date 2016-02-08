@@ -37,7 +37,7 @@ public class WeighInCardView extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.recyclerview, container, false);
+        View v = inflater.inflate(R.layout.weighins_recyclerview, container, false);
         Context applicationContext = getActivity();
         RecyclerView recList = (RecyclerView) v.findViewById(R.id.recyclerView);
         recList.setHasFixedSize(true);
@@ -46,7 +46,7 @@ public class WeighInCardView extends Fragment {
         recList.setLayoutManager(llm);
         WeighInLab.get(getActivity()).getAllWeighIns(getActivity());
         List<WeighIn> weighinList = WeighInLab.get(getActivity()).getWeighins();
-        RecyclerViewAdapter rva = new RecyclerViewAdapter(weighinList, getActivity());
+        RecyclerViewAdapter rva = new RecyclerViewAdapter(weighinList, getActivity(), "WeighIns");
         recList.setAdapter(rva);
 
         return v;

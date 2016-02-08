@@ -27,7 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     BitMapFactory bmf;
     Context mContext;
 
-    RecyclerViewAdapter(List<WeighIn> weighins, Context context) {
+    RecyclerViewAdapter(List<WeighIn> weighins, Context context, String entityType) {
         //Collections.reverse(weighins);
         this.listOfWeighIns = weighins;
         for (WeighIn w : listOfWeighIns) {

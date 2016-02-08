@@ -73,11 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
             Bundle bundleNew = new Bundle();
             bundleNew.putBoolean("isBackPressed", false);
-            customNavigationCall(2, bundleNew);
+            customNavigationCall(3, bundleNew);
             Log.d("log_1", "isntSavedInstance");
-
-
-
     }
 
     //Method for handling custom navigation calls through buttons clicks or navigation.
@@ -183,6 +180,15 @@ public class MainActivity extends AppCompatActivity {
                         .add(R.id.frame, wlf)
                         .commit();
                 changeTitle(R.string.title_weighins);
+                break;
+
+            case 3:
+                WeighInCardView wcv = new WeighInCardView();
+                mFragmentManager.beginTransaction()
+                        .add(R.id.frame, wcv)
+                        .commit();
+                changeTitle(R.string.title_weighins);
+                break;
 
         }
     }
