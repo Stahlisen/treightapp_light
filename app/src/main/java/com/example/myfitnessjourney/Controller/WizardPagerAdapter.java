@@ -18,16 +18,19 @@ public class WizardPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                 return new WizardFragment();
-
+                 return WizardFragment.newInstance(position);
+            case 1:
+                return WizardFragment.newInstance(position);
+            case 2:
+                return WizardFragment.newInstance(position);
             default:
-                return new WizardFragment();
+                return WizardFragment.newInstance(position);
 
         }
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }

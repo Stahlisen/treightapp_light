@@ -8,6 +8,7 @@ android {
         applicationId "com.example.myfitnessjourney.Controller"
         minSdkVersion 14
         targetSdkVersion 22
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -16,7 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/fonts'] } }
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/fonts']
+            java.srcDirs = ['src/main/java', 'src/test/', 'src/main/java/2', 'src/test/java/']
+        }
+    }
 }
 
 repositories {
@@ -24,6 +30,7 @@ repositories {
 }
 
 dependencies {
+    //compile files
     compile files('libs/Parse-1.9.4.jar')
     compile files('libs/bolts-android-1.2.0.jar')
     compile files('libs/realm-0.82.0.jar')
@@ -36,4 +43,17 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
     compile 'com.github.jakob-grabner:Circle-Progress-View:1.2.8'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1') {
+        // Necessary if your app targets Marshmallow (since Espresso
+        // hasn't moved to Marshmallow yet)
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test:runner:0.4.1') {
+        // Necessary if your app targets Marshmallow (since the test runner
+        // hasn't moved to Marshmallow yet)
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    testCompile 'junit:junit:4.12'
 }
