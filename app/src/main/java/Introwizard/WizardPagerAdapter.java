@@ -1,8 +1,11 @@
-package com.example.myfitnessjourney.Controller;
+package Introwizard;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import Introwizard.WizardFragment;
 
 /**
  * Created by fredrikstahl on 16-02-08.
@@ -20,7 +23,7 @@ public class WizardPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                  return WizardFragment.newInstance(position);
             case 1:
-                return WizardFragment.newInstance(position);
+                return new IntroFragmentWeight();
             case 2:
                 return WizardFragment.newInstance(position);
             default:

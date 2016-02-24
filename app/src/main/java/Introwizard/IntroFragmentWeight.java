@@ -19,15 +19,13 @@ public class IntroFragmentWeight extends Fragment {
     private EditText mEditWeight;
     private float enteredWeight;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         int layoutResId = R.layout.wizard_fragment_2;
         View view = getActivity().getLayoutInflater().inflate(layoutResId, container, false);
 
         mNameText = (TextView)view.findViewById(R.id.title_name);
-        mEditWeight = (EditText)view.findViewById(R.id.title_goalweight);
+        mEditWeight = (EditText)view.findViewById(R.id.edit_goalweight);
 
         mNameText.setText(getArguments().getString("entered_name"));
 

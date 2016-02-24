@@ -36,6 +36,7 @@
             android:textSize="35dp"/>
 
         <EditText
+            android:id="@+id/edit_goalweight"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

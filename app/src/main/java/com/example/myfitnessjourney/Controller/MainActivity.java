@@ -264,11 +264,10 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.progress:
-                        WeighInListFragment fragment = new WeighInListFragment();
-                        currentFragment = FRAGMENT_1;
-                        android.support.v4.app.FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.frame, fragment);
-                        fragmentTransaction.commit();
+                        WeighInCardView wcv = new WeighInCardView();
+                        mFragmentManager.beginTransaction()
+                                .add(R.id.frame, wcv)
+                                .commit();
                         changeTitle(R.string.title_weighins);
                         return true;
 

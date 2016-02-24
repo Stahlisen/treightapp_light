@@ -1,4 +1,4 @@
-package com.example.myfitnessjourney.Controller;
+package Introwizard;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.myfitnessjourney.Controller.R;
 
 /**
  * Created by fredrikstahl on 16-02-08.

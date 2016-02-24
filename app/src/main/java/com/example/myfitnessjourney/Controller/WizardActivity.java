@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.myfitnessjourney.Controller.R;
 import com.viewpagerindicator.LinePageIndicator;
+
+import Introwizard.WizardPagerAdapter;
 
 /**
  * Created by fredrikstahl on 16-02-08.
