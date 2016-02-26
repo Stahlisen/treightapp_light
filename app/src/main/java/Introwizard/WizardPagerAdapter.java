@@ -21,9 +21,9 @@ public class WizardPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                 return WizardFragment.newInstance(position);
+                return WizardFragment.newInstance(position);
             case 1:
-                return new IntroFragmentWeight();
+                return WizardFragment.newInstance(position);
             case 2:
                 return WizardFragment.newInstance(position);
             default:
@@ -36,4 +36,5 @@ public class WizardPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 3;
     }
+
 }

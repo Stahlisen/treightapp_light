@@ -19,6 +19,10 @@
     <string name="picture_label">PICTURE</string>
     <string name="picture_enter_hint">Take a picture or choose from gallery</string>
     <string name="your_photo_hint">Your photo</string>
+    <string name="wizard_text_1">
+        We are glad you found your way here. Treight combines the good old weight tracking journal by entering your weight every time you weigh youself
+        with a little twist to it, from now on, everytime you weigh youself, you take a picture of you body, preferably in the mirror.
+    </string>
 
     <string-array name="views">
         <item>Home/My Profile</item>

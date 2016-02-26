@@ -5,7 +5,7 @@
              android:background="@color/primary_dark_material_light"
              android:layout_height="match_parent">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,27 +14,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Welcome"
-            android:gravity="center"
+            android:gravity="center_horizontal|center_vertical"
             android:textColor="@android:color/white"
             android:layout_gravity="top|center"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
             android:layout_marginTop="140dp"
-            android:textSize="40dp"/>
+            android:textSize="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
-        <EditText
-            android:id="@+id/enter_name_edit"
-            android:layout_width="140dp"
+        <TextView
+            android:id="@+id/wizard_text1"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="Enter your name"
+            android:text="We are glad you found your way here."
             android:textColor="@android:color/white"
             android:textColorHint="@color/text_white"
-            android:singleLine="true"
-            android:maxLength="30"
-            android:gravity="center"/>
+            android:textSize="18dp"
+            android:layout_below="@+id/title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
 
-    </FrameLayout>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/wizard_text2"
+            android:layout_below="@id/wizard_text1"
+            android:text="Treight is all about the visual transformation that your body is going through while you're putting in all that effort at the gym."
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/text_white"
+            android:textSize="18dp"
+            android:layout_marginTop="80dp"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"/>
+
+    </RelativeLayout>
 
 
 

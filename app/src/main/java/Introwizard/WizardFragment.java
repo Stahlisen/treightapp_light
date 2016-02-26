@@ -47,8 +47,6 @@ public class WizardFragment extends Fragment {
         }
 
         View view = getActivity().getLayoutInflater().inflate(layoutResId, container, false);
-        mEditName = (EditText) view.findViewById(R.id.enter_name_edit);
-        mName = (TextView) view.findViewById(R.id.title_name);
 
 
         view.setTag(mPage);
