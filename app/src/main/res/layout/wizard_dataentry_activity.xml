@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark_material_light">
+
+    <EditText
+        android:id="@+id/edit_enter_name"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter your name"
+        android:textColorHint="@color/text_white"
+        android:textColor="@color/text_white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:maxLength="30"
+        android:singleLine="true"
+        android:gravity="center"
+        android:textSize="30dp"/>
+
+    <EditText
+        android:id="@+id/edit_enter_current_weight"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_enter_name"
+        android:hint="Enter your current weight"
+        android:textColorHint="@color/text_white"
+        android:textColor="@color/text_white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:maxLength="30"
+        android:singleLine="true"
+        android:gravity="center"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/edit_enter_goal_weight"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_enter_current_weight"
+        android:hint="Enter your goal weight"
+        android:textColorHint="@color/text_white"
+        android:textColor="@color/text_white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:maxLength="30"
+        android:singleLine="true"
+        android:gravity="center"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/edit_enter_goal_date"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_enter_goal_weight"
+        android:hint="Enter your goal date"
+        android:textColorHint="@color/text_white"
+        android:textColor="@color/text_white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:maxLength="30"
+        android:singleLine="true"
+        android:gravity="center"
+        android:textSize="20dp"/>
+
+
+
+</RelativeLayout>
