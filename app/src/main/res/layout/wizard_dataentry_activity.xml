@@ -63,6 +63,38 @@
         android:gravity="center"
         android:textSize="20dp"/>
 
+    <Button
+        android:id="@+id/button_takePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_enter_goal_date"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:text="TAKE A PHOTO"
+        android:textColor="@color/text_white"
+        style="?android:attr/borderlessButtonStyle"
+        />
 
+    <TextView
+        android:id="@+id/text_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:layout_toRightOf="@id/button_takePhoto"
+        android:layout_below="@id/edit_enter_goal_date"
+        android:layout_alignBaseline="@id/button_takePhoto"
+        />
+
+    <Button
+        android:id="@+id/button_selectPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_enter_goal_date"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@id/text_or"
+        android:text="SELECT A PHOTO"
+        android:textColor="@color/text_white"
+        style="?android:attr/borderlessButtonStyle"
+        />
 
 </RelativeLayout>
