@@ -44,21 +44,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_main_activity);
+        setContentView(R.layout.main_activity);
 
-        /*
-        Alarm alarm = new Alarm(4, true, 21, 33, "Monday");
-        WeighInLab.get(this).createNewRealmAlarm(alarm);
-        */
-
-
-        /*
-        Alarm savedAlarm = WeighInLab.get(this).getAlarm();
-        if (savedAlarm != null) {
-            scheduleNextAlarm(savedAlarm);
-            Log.d("recycler", "YES ALARM EXISTS!");
-        }
-        */
+        //Use this if realm error appears
         //Realm.deleteRealmFile(this);
 
         if (WeighInLab.get(this).getAlarms() != null) {
@@ -74,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundleNew = new Bundle();
             bundleNew.putBoolean("isBackPressed", false);
             customNavigationCall(3, bundleNew);
-            Log.d("log_1", "isntSavedInstance");
     }
 
     //Method for handling custom navigation calls through buttons clicks or navigation.
@@ -244,7 +231,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         //getSupportActionBar().setIcon(R.drawable.treight_white);
 
-
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         TextView mTextView = (TextView) findViewById(R.id.profile_label_text);
@@ -363,7 +349,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeTitle(int stringResource) {
         toolbar_title.setText(stringResource);
-
     }
 
     public TextView getToolbar_title() {
