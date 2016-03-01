@@ -53,6 +53,13 @@
     <string name="message_unscheduleAlarm">Unschedule this weighin?</string>
     <string name="message_reschduleAlarm">Reschedule this weighin?</string>
 
+    <string name="new_weighin_tag_fragment">FRAGMENT_1A</string>
+    <string name="weighin_list_tag_fragment">FRAGMENT_2A</string>
+    <string name="goal_list_tag_fragment">FRAGMENT_3A</string>
+    <string name="new_goal_tag_fragment">FRAGMENT_1B</string>
+    <string name="schedule_list_tag_fragment">FRAGMENT_2B</string>
+    <string name="new_schedule_tag_fragment">FRAGMENT_3B</string>
+
 
 
 
