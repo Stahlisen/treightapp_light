@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,22 +19,11 @@ import java.util.List;
 import Model.WeighIn;
 import Services.WeighInLab;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class WeighInCardView extends Fragment {
 
-
-
-    public WeighInCardView() {
-        // Required empty public constructor
-    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.d("recycler", "onCreate");
-
     }
 
     @Override
@@ -39,44 +31,37 @@ public class WeighInCardView extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.weighins_recyclerview, container, false);
         Context applicationContext = getActivity();
-        RecyclerView recList = (RecyclerView) v.findViewById(R.id.recyclerView);
-        recList.setHasFixedSize(true);
+
         LinearLayoutManager llm = new LinearLayoutManager(applicationContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
+
+        RecyclerView recList = (RecyclerView) v.findViewById(R.id.recyclerView);
+        recList.setHasFixedSize(true);
         recList.setLayoutManager(llm);
+
         WeighInLab.get(getActivity()).getAllWeighIns(getActivity());
         List<WeighIn> weighinList = WeighInLab.get(getActivity()).getWeighins();
         RecyclerViewAdapter rva = new RecyclerViewAdapter(weighinList, getActivity(), "WeighIns");
         recList.setAdapter(rva);
+        setHasOptionsMenu(true);
 
         return v;
     }
-    /*
-    private class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTextView;
-        private CardView mCardView;
 
-        public RecyclerViewHolder (final View view) {
-            super(view);
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
-            mTextView = (TextView) view.findViewById(R.id.cardView_title);
-            mCardView = (CardView) view.findViewById(R.id.card_view);
-            mCardView.setRadius(15);
-        }
-
-        public TextView getTextView() {
-            return mTextView;
-        }
-
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.progress, menu);
     }
-    */
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case R.id.action_add:
+                ((MainActivity) getActivity()).customNavigationCall(R.id.action_add, null);
+                break;
+        }
+        return true;
+    }
 }

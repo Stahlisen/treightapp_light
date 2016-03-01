@@ -88,7 +88,7 @@ public class WeighInScheduleFragment extends Fragment {
 
     public View populateViewForOrientation(LayoutInflater inflater, ViewGroup viewGroup) {
         viewGroup.removeAllViewsInLayout();
-        View view = inflater.inflate(R.layout.weighins_recyclerview, viewGroup);
+        View view = inflater.inflate(R.layout.schedule_recyclerview, viewGroup);
 
         return view;
     }

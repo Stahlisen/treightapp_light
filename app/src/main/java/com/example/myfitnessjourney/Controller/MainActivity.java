@@ -183,9 +183,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 3:
-                WeighInCardView wcv = new WeighInCardView();
+                WeighInCardView wcv = (WeighInCardView) mFragmentManager.findFragmentByTag("weighin_cardview");
+                if (wcv == null) {
+                    wcv = new WeighInCardView();
+                }
                 mFragmentManager.beginTransaction()
-                        .add(R.id.frame, wcv)
+                        .replace(R.id.frame, wcv, "weighin_cardview")
                         .commit();
                 changeTitle(R.string.title_weighins);
                 break;
@@ -264,16 +267,22 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.progress:
-                        WeighInCardView wcv = new WeighInCardView();
+
+                        WeighInCardView wcv = (WeighInCardView) mFragmentManager.findFragmentByTag("weighin_cardview");
+                        if (wcv == null) {
+                            wcv = new WeighInCardView();
+                        }
                         mFragmentManager.beginTransaction()
-                                .add(R.id.frame, wcv)
+                                .replace(R.id.frame, wcv, "weighin_cardview")
                                 .commit();
                         changeTitle(R.string.title_weighins);
                         return true;
 
                     case R.id.my_goal:
-                        GoalFragment gf = new GoalFragment();
-                        currentFragment = FRAGMENT_2;
+                        GoalFragment gf = (GoalFragment) mFragmentManager.findFragmentByTag("goal_fragment");
+                        if (gf == null) {
+                            gf = new GoalFragment();
+                        }
                         mFragmentManager.beginTransaction()
                                 .replace(R.id.frame, gf, "goal_fragment")
                                 .commit();
@@ -281,8 +290,10 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.scheduler:
-                        Log.d("recycler", "scheduler");
-                        WeighInScheduleFragment wsf = new WeighInScheduleFragment();
+                        WeighInScheduleFragment wsf = (WeighInScheduleFragment) mFragmentManager.findFragmentByTag("schedule_fragment");
+                        if (wsf == null) {
+                            wsf = new WeighInScheduleFragment();
+                        }
                         mFragmentManager.beginTransaction()
                                 .replace(R.id.frame, wsf, "schedule_fragment")
                                 .commit();
