@@ -30,12 +30,6 @@
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:label="Treight">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
 
         <receiver android:name=".AlarmTriggerReceiver" />
@@ -53,11 +47,22 @@
             android:label="@string/title_activity_journey_tab"
             android:theme="@style/AppBaseTheme">
         </activity>
+        
+        <activity
+            android:name=".WizardDataEntryActivity"
+            android:theme="@style/AppBaseTheme">
+        </activity>
 
         <activity
             android:name=".WizardActivity"
             android:label="@string/title_activity_journey_tab"
             android:theme="@style/AppBaseTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

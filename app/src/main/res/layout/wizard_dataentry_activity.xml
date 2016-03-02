@@ -16,18 +16,27 @@
         android:maxLength="30"
         android:singleLine="true"
         android:gravity="center"
-        android:textSize="30dp"/>
+        android:textSize="20dp"/>
+
+    <Spinner
+        android:id="@+id/metrics_spinner"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_enter_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+    </Spinner>
 
     <EditText
         android:id="@+id/edit_enter_current_weight"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_enter_name"
+        android:layout_below="@id/metrics_spinner"
         android:hint="Enter your current weight"
         android:textColorHint="@color/text_white"
         android:textColor="@color/text_white"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:maxLength="30"
         android:singleLine="true"
         android:gravity="center"

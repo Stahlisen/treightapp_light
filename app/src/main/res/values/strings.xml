@@ -30,6 +30,11 @@
         <item>Settings</item>
     </string-array>
 
+    <string-array name="metrics">
+        <item>Pounds(lbs)</item>
+        <item>Kilograms(Kg)</item>
+    </string-array>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 

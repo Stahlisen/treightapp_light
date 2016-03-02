@@ -1,14 +1,13 @@
 package com.example.myfitnessjourney.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.myfitnessjourney.Controller.R;
 import com.viewpagerindicator.CirclePageIndicator;
-import com.viewpagerindicator.LinePageIndicator;
 
 import Introwizard.WizardPagerAdapter;
 
@@ -48,7 +47,8 @@ public class WizardActivity extends AppCompatActivity {
                 }
 
                 if (mViewPager.getCurrentItem() == 2) {
-                    //Let's go
+                    Intent activityIntent = new Intent(getApplicationContext(), WizardDataEntryActivity.class);
+                    startActivity(activityIntent);
                 } else {
                     mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
                 }
