@@ -33,11 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle abdToggle;
-    public static final int FRAGMENT_1 = 0;
-    public static final int FRAGMENT_1A = 1;
-    public static final int FRAGMENT_1B = 2;
-    public static final int FRAGMENT_2 = 3;
-    public int currentFragment;
     public static int SELECTED_WEIGHIN = 0;
     public FragmentManager mFragmentManager;
 
@@ -75,18 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 if (nwf == null) {
                     nwf = new NewWeighInFragment();
                     mFragmentManager.beginTransaction()
-                            .replace(R.id.frame, nwf, "FRAGMENT_1A")
-                            .addToBackStack("FRAGMENT_1A")
+                            .replace(R.id.frame, nwf, this.getString(R.string.new_weighin_tag_fragment))
+                            .addToBackStack(this.getString(R.string.new_weighin_tag_fragment))
                             .commit();
                 } else {
                     mFragmentManager.beginTransaction()
-                            .replace(R.id.frame, nwf, "FRAGMENT_1A")
+                            .replace(R.id.frame, nwf, this.getString(R.string.new_weighin_tag_fragment))
                             .commit();
                 }
-                currentFragment = FRAGMENT_1A;
+
                 changeTitle(R.string.title_newWeighin);
-
-
                 break;
 
             case R.id.action_add_alarm:
@@ -95,10 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 abdToggle.setDrawerIndicatorEnabled(false);
                 NewAlarmFragment naf = new NewAlarmFragment();
                 mFragmentManager.beginTransaction()
-                        .replace(R.id.frame, naf, "newAlarm_fragment")
-                        .addToBackStack("newAlarm_Fragment")
+                        .replace(R.id.frame, naf, this.getString(R.string.new_schedule_tag_fragment))
+                        .addToBackStack(this.getString(R.string.new_schedule_tag_fragment))
                         .commit();
-
                 break;
 
             case R.id.home:
@@ -106,57 +98,51 @@ public class MainActivity extends AppCompatActivity {
                     onBackPressed();
                 }
                 WeighInListFragment fragment = new WeighInListFragment();
-                currentFragment = FRAGMENT_1;
 
                 mFragmentManager.beginTransaction()
                         .replace(R.id.frame, fragment)
                         .commit();
                 changeTitle(R.string.title_weighins);
-
                 break;
 
             case R.id.scheduler:
                 onBackPressed();
-                WeighInScheduleFragment wsf = (WeighInScheduleFragment) mFragmentManager.findFragmentByTag("schedule_fragment");
+                WeighInScheduleFragment wsf = (WeighInScheduleFragment) mFragmentManager.findFragmentByTag(this.getString(R.string.schedule_list_tag_fragment));
                 if (wsf == null) {
                     wsf = new WeighInScheduleFragment();
                 }
 
                 mFragmentManager.beginTransaction()
-                        .replace(R.id.frame, wsf, "schedule_fragment")
+                        .replace(R.id.frame, wsf, this.getString(R.string.schedule_list_tag_fragment))
                         .commit();
                 changeTitle(R.string.title_alarm);
                 break;
 
             case R.layout.weighin_detail:
                 abdToggle.setDrawerIndicatorEnabled(false);
-                WeighInDetailFragment wdf = (WeighInDetailFragment) mFragmentManager.findFragmentByTag("FRAGMENT_1B");
+                WeighInDetailFragment wdf = (WeighInDetailFragment) mFragmentManager.findFragmentByTag(this.getString(R.string.weighin_detail_tag_fragment));
                 if (wdf == null) {
                     wdf = new WeighInDetailFragment();
                     wdf.setArguments(bundle);
                     mFragmentManager.beginTransaction()
-                            .replace(R.id.frame, wdf, "FRAGMENT_1B")
-                            .addToBackStack("FRAGMENT_1B")
+                            .replace(R.id.frame, wdf, this.getString(R.string.weighin_detail_tag_fragment))
+                            .addToBackStack(this.getString(R.string.weighin_detail_tag_fragment))
                             .commit();
                 } else {
                     mFragmentManager.beginTransaction()
-                            .replace(R.id.frame, wdf, "FRAGMENT_1B")
+                            .replace(R.id.frame, wdf, this.getString(R.string.weighin_detail_tag_fragment))
                             .commit();
                  }
-
-                currentFragment = FRAGMENT_1B;
 
                 break;
 
             case R.id.my_goal:
-                GoalFragment gff = (GoalFragment) mFragmentManager.findFragmentByTag("goal_fragment");
+                GoalFragment gff = (GoalFragment) mFragmentManager.findFragmentByTag(this.getString(R.string.goal_list_tag_fragment));
                 if (gff == null) {
                     gff = new GoalFragment();
                 }
-
-                currentFragment = FRAGMENT_2;
                 mFragmentManager.beginTransaction()
-                        .replace(R.id.frame, gff, "goal_fragment")
+                        .replace(R.id.frame, gff, this.getString(R.string.goal_list_tag_fragment))
                         .commit();
                 changeTitle(R.string.title_goal);
                 break;
@@ -170,16 +156,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 3:
-                WeighInCardView wcv = (WeighInCardView) mFragmentManager.findFragmentByTag("weighin_cardview");
+                WeighInCardView wcv = (WeighInCardView) mFragmentManager.findFragmentByTag(this.getString(R.string.weighin_list_tag_fragment));
                 if (wcv == null) {
                     wcv = new WeighInCardView();
                 }
                 mFragmentManager.beginTransaction()
-                        .replace(R.id.frame, wcv, "weighin_cardview")
+                        .replace(R.id.frame, wcv, this.getString(R.string.weighin_list_tag_fragment))
                         .commit();
                 changeTitle(R.string.title_weighins);
                 break;
-
         }
     }
 
@@ -203,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
             //Not implemented
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -212,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
         if (mFragmentManager.getBackStackEntryCount() > 0) {
             mFragmentManager.popBackStack();
             changeTitle(R.string.title_weighins);
-            currentFragment = FRAGMENT_1;
         } else {
             super.onBackPressed();
         }
@@ -227,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar_title.setTypeface(tf);
         toolbar_title.setText("treight app");
 
-
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         //getSupportActionBar().setIcon(R.drawable.treight_white);
 
@@ -238,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
             // This method will trigger on item Click of navigation menu
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -253,41 +234,39 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.progress:
-
-                        WeighInCardView wcv = (WeighInCardView) mFragmentManager.findFragmentByTag("weighin_cardview");
+                        WeighInCardView wcv = (WeighInCardView) mFragmentManager.findFragmentByTag(getString(R.string.weighin_list_tag_fragment));
                         if (wcv == null) {
                             wcv = new WeighInCardView();
                         }
                         mFragmentManager.beginTransaction()
-                                .replace(R.id.frame, wcv, "weighin_cardview")
-                                .commit();
+                                .replace(R.id.frame, wcv, getString(R.string.weighin_list_tag_fragment))
+                                        .commit();
                         changeTitle(R.string.title_weighins);
                         return true;
 
                     case R.id.my_goal:
-                        GoalFragment gf = (GoalFragment) mFragmentManager.findFragmentByTag("goal_fragment");
+                        GoalFragment gf = (GoalFragment) mFragmentManager.findFragmentByTag(getString(R.string.goal_list_tag_fragment));
                         if (gf == null) {
                             gf = new GoalFragment();
                         }
                         mFragmentManager.beginTransaction()
-                                .replace(R.id.frame, gf, "goal_fragment")
+                                .replace(R.id.frame, gf, getString(R.string.goal_list_tag_fragment))
                                 .commit();
                         changeTitle(R.string.title_goal);
                         return true;
 
                     case R.id.scheduler:
-                        WeighInScheduleFragment wsf = (WeighInScheduleFragment) mFragmentManager.findFragmentByTag("schedule_fragment");
+                        WeighInScheduleFragment wsf = (WeighInScheduleFragment) mFragmentManager.findFragmentByTag(getString(R.string.schedule_list_tag_fragment));
                         if (wsf == null) {
                             wsf = new WeighInScheduleFragment();
                         }
                         mFragmentManager.beginTransaction()
-                                .replace(R.id.frame, wsf, "schedule_fragment")
+                                .replace(R.id.frame, wsf, getString(R.string.schedule_list_tag_fragment))
                                 .commit();
                         changeTitle(R.string.title_alarm);
 
                     default:
                         return true;
-
                 }
             }
         });

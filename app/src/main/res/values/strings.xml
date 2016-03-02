@@ -59,7 +59,7 @@
     <string name="new_goal_tag_fragment">FRAGMENT_1B</string>
     <string name="schedule_list_tag_fragment">FRAGMENT_2B</string>
     <string name="new_schedule_tag_fragment">FRAGMENT_3B</string>
-
+    <string name="weighin_detail_tag_fragment">FRAGMENT_4A</string>
 
 
 
