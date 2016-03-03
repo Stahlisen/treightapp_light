@@ -16,7 +16,7 @@
         android:maxLength="30"
         android:singleLine="true"
         android:gravity="center"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <Spinner
         android:id="@+id/metrics_spinner"
@@ -40,7 +40,8 @@
         android:maxLength="30"
         android:singleLine="true"
         android:gravity="center"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:focusable="false"/>
 
     <EditText
         android:id="@+id/edit_enter_goal_weight"
@@ -55,7 +56,8 @@
         android:maxLength="30"
         android:singleLine="true"
         android:gravity="center"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:focusable="false"/>
 
     <EditText
         android:id="@+id/edit_enter_goal_date"
@@ -70,14 +72,15 @@
         android:maxLength="30"
         android:singleLine="true"
         android:gravity="center"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:focusable="false"/>
 
     <Button
         android:id="@+id/button_takePhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_enter_goal_date"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="50dp"
         android:text="TAKE A PHOTO"
         android:textColor="@color/text_white"
@@ -99,11 +102,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_enter_goal_date"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_toRightOf="@id/text_or"
         android:text="SELECT A PHOTO"
         android:textColor="@color/text_white"
         style="?android:attr/borderlessButtonStyle"
         />
+
+
+    <TextView
+        android:id="@+id/validation_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_selectPhoto"
+        android:text="validation"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/text_white"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/validation_error"
+        android:text="SUBMIT"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/text_white"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+
 
 </RelativeLayout>
