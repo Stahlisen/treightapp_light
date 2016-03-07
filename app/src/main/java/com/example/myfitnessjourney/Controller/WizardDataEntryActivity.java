@@ -3,6 +3,7 @@ package com.example.myfitnessjourney.Controller;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import Model.WeighIn;
+
 /**
  * Created by fst on 2016-02-26.
  */
@@ -42,9 +45,6 @@ public class WizardDataEntryActivity extends AppCompatActivity{
     private float selectedFloat;
     private float enteredWeightFloat;
     private Date selectedDate;
-
-    //TODO:
-    // - Add custom spinner dropdown item
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,7 +118,9 @@ public class WizardDataEntryActivity extends AppCompatActivity{
             mFieldMissingValidationError.setVisibility(View.VISIBLE);
             mFieldMissingValidationError.setText(formValidationForFields);
         } else {
-
+            //Save to realm
+            Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(mainActivityIntent);
         }
     }
 

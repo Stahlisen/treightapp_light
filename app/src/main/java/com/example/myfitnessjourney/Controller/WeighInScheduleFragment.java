@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ import Services.WeighInLab;
  */
 public class WeighInScheduleFragment extends Fragment {
     List<Alarm> alarmList;
+    TextView mNoScheduleText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class WeighInScheduleFragment extends Fragment {
              alarmList = WeighInLab.get(getActivity()).getAlarms();
         } else {
             alarmList = new ArrayList<Alarm>();
+            mNoScheduleText.setVisibility(View.VISIBLE);
+
         }
 
         RecyclerViewAdapterSchedule rvas = new RecyclerViewAdapterSchedule(alarmList, getActivity());
@@ -89,6 +93,7 @@ public class WeighInScheduleFragment extends Fragment {
     public View populateViewForOrientation(LayoutInflater inflater, ViewGroup viewGroup) {
         viewGroup.removeAllViewsInLayout();
         View view = inflater.inflate(R.layout.schedule_recyclerview, viewGroup);
+        mNoScheduleText = (TextView) view.findViewById(R.id.no_schedule_weighins_text);
 
         return view;
     }

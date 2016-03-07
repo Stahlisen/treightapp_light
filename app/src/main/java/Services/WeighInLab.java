@@ -60,6 +60,11 @@ public class WeighInLab {
         return mWeighins;
     }
 
+    public Float getCurrentWeight() {
+        Float currentWeight = mWeighins.get(0).getWeight();
+        return currentWeight;
+    }
+
     //Method to create a new realm weighin from the weighin object passed as a parameter
     public void createNewRealmWeighIn(WeighIn weighin, Context context) {
         int id = getLastIndexOfWeighins(context) + 1;

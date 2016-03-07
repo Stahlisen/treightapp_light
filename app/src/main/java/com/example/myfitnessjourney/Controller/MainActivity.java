@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
                 if (bundle == null) {
                     onBackPressed();
                 }
-                WeighInListFragment fragment = new WeighInListFragment();
+                WeighInCardView wcFragment = new WeighInCardView();
 
                 mFragmentManager.beginTransaction()
-                        .replace(R.id.frame, fragment)
+                        .replace(R.id.frame, wcFragment)
                         .commit();
                 changeTitle(R.string.title_weighins);
                 break;
@@ -148,9 +148,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 2:
-                WeighInListFragment wlf = new WeighInListFragment();
+                WeighInCardView wcv1 = new WeighInCardView();
                 mFragmentManager.beginTransaction()
-                        .add(R.id.frame, wlf)
+                        .add(R.id.frame, wcv1)
                         .commit();
                 changeTitle(R.string.title_weighins);
                 break;
